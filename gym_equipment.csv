@@ -1,0 +1,7 @@
+machine_id,name,category,swap_id
+BP_01,Barbell Bench Press,Chest,DB_01
+DB_01,Dumbbell Bench,Chest,BP_01
+SQ_01,Squat Rack 1,Legs,LP_01
+LP_01,Leg Press,Legs,SQ_01
+CB_01,Cable Crossover,Full Body,None
+PD_01,Lat Pulldown,Back,CB_01

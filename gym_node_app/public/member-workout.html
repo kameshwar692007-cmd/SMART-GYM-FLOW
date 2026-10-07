@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Smart Workout - Smart Gym</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .step-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 6px solid #3b82f6;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        .step-card.working-in {
+            border-left-color: var(--accent-yellow);
+            background: linear-gradient(135deg, #1c1917 0%, #151d2e 100%);
+        }
+        .step-card.three-way {
+            border-left-color: #ec4899;
+            background: linear-gradient(135deg, #2a081f 0%, #151d2e 100%);
+        }
+        .timer-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 14px;
+        }
+        .countdown-display {
+            font-size: 24px;
+            font-weight: 800;
+            color: #38bdf8;
+            font-family: monospace;
+        }
+        .ai-metric-pill {
+            background: rgba(0,0,0,0.35);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .quick-time-bar {
+            background: #0f172a;
+            border: 1px solid #38bdf8;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .rotation-badge {
+            background: rgba(236, 72, 153, 0.2);
+            border: 1px solid #ec4899;
+            color: #fbcfe8;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .dwell-chip {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid #0284c7;
+            color: #7dd3fc;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 900px; margin-top: 30px; margin-bottom: 60px;">
+        <div class="header-bar">
+            <div>
+                <span class="logo-text">🏋️ Operations-Optimized Workout Plan</span>
+                <span id="memberNameHeader" style="color: var(--text-secondary); margin-left: 12px; font-size: 15px;">Loading...</span>
+            </div>
+            <div>
+                <a href="/member/assessment" class="btn btn-secondary" style="font-size: 13px; padding: 8px 14px; margin-right: 8px;">Edit Biometrics</a>
+                <a href="/member/login" class="btn btn-secondary" style="font-size: 13px; padding: 8px 14px;">Switch User</a>
+            </div>
+        </div>
+
+        <!-- Sudden Entry & Live Timing Switcher -->
+        <div class="quick-time-bar">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 20px;">⚡</span>
+                <div>
+                    <div style="font-weight: 700; color: #f8fafc; font-size: 14px;">Instant Arrival & Sudden Entry Re-Scheduler</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Arriving right now or changed your timing? Re-solves FJSP constraint graph in real time!</div>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <select id="quickTimeSelect" style="padding: 8px 12px; border-radius: 6px; background: #1e293b; color: #f8fafc; border: 1px solid #475569; font-size: 13px;">
+                    <option value="06:00 AM">06:00 AM</option>
+                    <option value="07:00 AM">07:00 AM</option>
+                    <option value="07:30 AM">07:30 AM</option>
+                    <option value="08:00 AM" selected>08:00 AM (Morning Rush)</option>
+                    <option value="08:15 AM">08:15 AM</option>
+                    <option value="08:30 AM">08:30 AM</option>
+                    <option value="09:00 AM">09:00 AM</option>
+                    <option value="05:00 PM">05:00 PM</option>
+                    <option value="05:30 PM">05:30 PM</option>
+                    <option value="06:00 PM">06:00 PM (Evening Rush)</option>
+                    <option value="06:30 PM">06:30 PM</option>
+                    <option value="07:00 PM">07:00 PM</option>
+                </select>
+                <select id="quickMuscleSelect" style="padding: 8px 12px; border-radius: 6px; background: #1e293b; color: #f8fafc; border: 1px solid #475569; font-size: 13px;">
+                    <option value="Chest" selected>Chest</option>
+                    <option value="Legs">Legs</option>
+                    <option value="Back">Back</option>
+                    <option value="Full Body">Full Body</option>
+                </select>
+                <button class="btn btn-primary" onclick="submitSuddenEntry()" style="padding: 8px 16px; font-size: 13px; background: linear-gradient(135deg, #0284c7, #2563eb);">
+                    ⚡ Update Arrival Now
+                </button>
+            </div>
+        </div>
+
+        <div id="suddenMsg" style="display: none; padding: 10px 14px; border-radius: 8px; background: #064e3b; border: 1px solid #10b981; color: #a7f3d0; margin-bottom: 16px; font-size: 13px; font-weight: 600;"></div>
+
+        <!-- Biometric & Equipment Utility Summary Banner -->
+        <div id="bioSummaryCard" class="card" style="background: linear-gradient(135deg, #0c4a6e 0%, #1e1b4b 100%); border-color: #38bdf8; padding: 18px 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <h3 id="bioTitle" style="color: #f8fafc; font-size: 18px; margin-bottom: 4px;">Loading Profile...</h3>
+                    <p id="bioDetails" style="color: #bae6fd; font-size: 14px; margin: 0;">Goal: Hypertrophy | Arrival: 08:00 AM</p>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div id="eurBadge" class="ai-metric-pill" style="color: #a7f3d0; border: 1px solid #10b981; background: rgba(6, 78, 59, 0.4);">
+                        ⚙️ Floor EUR: 84.5%
+                    </div>
+                    <div id="bioBmiBadge" class="ai-metric-pill" style="color: #38bdf8; border: 1px solid #0284c7;">
+                        BMI: --
+                    </div>
+                    <div id="aiCalorieBadge" class="ai-metric-pill" style="color: #fde68a; border: 1px solid #d97706;">
+                        🔥 ~450 kcal
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px 0;">
+            <h2 style="font-size: 22px;">🚶 Step-by-Step Exercise Itinerary (Zero Waiting)</h2>
+            <span style="color: var(--text-secondary); font-size: 13px;">Dwell times predicted by <b>Model A (R² = 0.980, MAE = 0.52 min)</b></span>
+        </div>
+
+        <div id="workoutStepsContainer">
+            <div class="card" style="text-align: center; color: var(--text-secondary);">Loading your workout routine from FJSP optimizer...</div>
+        </div>
+    </div>
+
+    <script>
+        const activeUsername = localStorage.getItem('activeUsername') || 'alex';
+        const activeMember = localStorage.getItem('activeMemberName') || "Alex Miller";
+        document.getElementById('memberNameHeader').innerText = `@${activeUsername} (${activeMember})`;
+
+        let activeTimers = {};
+
+        async function fetchWorkout() {
+            try {
+                const res = await fetch(`/api/member/workout/${encodeURIComponent(activeUsername)}`);
+                const data = await res.json();
+                if (!data.success || !data.plan) {
+                    document.getElementById('workoutStepsContainer').innerHTML = "<div class='card'>No plan found. Please complete the biometric assessment.</div>";
+                    return;
+                }
+
+                const member = data.plan.member;
+                const steps = data.plan.steps;
+
+                // Sync sudden time selectors
+                if (member.todayArrivalTime) document.getElementById('quickTimeSelect').value = member.todayArrivalTime;
+                if (member.focusMuscle) document.getElementById('quickMuscleSelect').value = member.focusMuscle;
+
+                // Update Header Banner
+                document.getElementById('bioTitle').innerText = `${member.name}'s Routine for ${member.todayArrivalTime}`;
+                document.getElementById('bioDetails').innerText = `Goal: ${member.goal} | Experience: ${member.experience} | Target: ${member.focusMuscle}`;
+                document.getElementById('bioBmiBadge').innerText = `BMI: ${member.bmi} (${(member.bmiCategory || 'Normal').split(' ')[0]})`;
+                if (data.eurScore) {
+                    document.getElementById('eurBadge').innerText = `⚙️ Floor EUR: ${data.eurScore}%`;
+                }
+
+                // Render Workout Steps
+                const container = document.getElementById('workoutStepsContainer');
+                container.innerHTML = '';
+
+                if (steps.length === 0) {
+                    container.innerHTML = `<div class="card" style="text-align: center;">No exercises assigned yet for ${member.focusMuscle}.</div>`;
+                    return;
+                }
+
+                steps.forEach((step, idx) => {
+                    const mode = step.sharingMode || (step.isWorkingIn ? '2-Way Interleaved' : 'Direct');
+                    const is3Way = mode.includes('3-Way');
+                    const is2Way = mode.includes('2-Way');
+                    const isWorkingIn = is3Way || is2Way;
+                    const partnerText = step.partnerName || (step.partners ? step.partners.join(' & ') : 'Partner');
+                    const timerId = `timer_${idx}`;
+                    const dwellMinutes = step.predictedDwellMins || 12.0;
+
+                    const card = document.createElement('div');
+                    card.className = `step-card ${is3Way ? 'three-way' : (is2Way ? 'working-in' : '')}`;
+
+                    let badgeHtml = '';
+                    if (is3Way) {
+                        badgeHtml = `<span class="rotation-badge">⚡ 3-Way Cyclic Rotation (${partnerText})</span>`;
+                    } else if (is2Way) {
+                        badgeHtml = `<span class="badge badge-yellow">🤝 2-Way Interleaved with ${partnerText}</span>`;
+                    } else {
+                        badgeHtml = `<span class="badge badge-green">🟢 Direct Station Access</span>`;
+                    }
+
+                    let workingInHtml = '';
+                    if (is3Way) {
+                        workingInHtml = `
+                            <div class="timer-box" style="border-color: #ec4899; background: #1a0b16;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                    <b style="color: #fbcfe8; font-size: 15px;">⚡ High-Density 3-Way Cyclic Round-Robin</b>
+                                    <span style="font-size: 12px; color: #ec4899; font-weight: 700;">Rest Scaled to ${step.restSeconds}s</span>
+                                </div>
+                                <p style="color: #cbd5e1; font-size: 13px; margin: 4px 0 10px 0;">
+                                    <b>Rotation Order:</b> You lift (45s) &rarr; Partner 1 lifts (45s) &rarr; Partner 2 lifts (45s). By the time both partners finish, your full rest is completed with <b>zero wait lines</b>!
+                                </p>
+                                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px; background: linear-gradient(135deg, #ec4899, #be185d);" onclick="startRestCountdown('${timerId}', ${step.restSeconds}, '${partnerText}')">
+                                        🏁 Finished My Set (Start ${step.restSeconds}s Rest & Tag Next)
+                                    </button>
+                                    <span id="${timerId}" class="countdown-display" style="display: none;">${step.restSeconds}s</span>
+                                    <span id="${timerId}_status" style="color: #94a3b8; font-size: 13px;">Co-lifters: <b>${partnerText}</b></span>
+                                </div>
+                            </div>
+                        `;
+                    } else if (is2Way) {
+                        workingInHtml = `
+                            <div class="timer-box">
+                                <b style="color: #fde68a; font-size: 15px;">⏱️ Shared Set & Rest Rotation (You & ${partnerText})</b>
+                                <p style="color: #cbd5e1; font-size: 13px; margin: 6px 0 10px 0;">
+                                    While ${partnerText} rests for ${step.restSeconds}s, <b>you take your set</b>! Alternating rest and work doubles machine efficiency.
+                                </p>
+                                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px; background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="startRestCountdown('${timerId}', ${step.restSeconds}, '${partnerText}')">
+                                        🏁 Finished My Set (Start Rest & Tag ${partnerText})
+                                    </button>
+                                    <span id="${timerId}" class="countdown-display" style="display: none;">${step.restSeconds}s</span>
+                                    <span id="${timerId}_status" style="color: #94a3b8; font-size: 13px;">Partner: <b>${partnerText} is ready</b></span>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        workingInHtml = `
+                            <div style="margin-top: 12px; display: flex; align-items: center; gap: 12px;">
+                                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="startRestCountdown('${timerId}', ${step.restSeconds}, null)">
+                                    ⏱️ Rest Timer (${step.restSeconds}s)
+                                </button>
+                                <span id="${timerId}" class="countdown-display" style="display: none;">${step.restSeconds}s</span>
+                            </div>
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <h3 style="font-size: 20px; font-weight: 700;">Exercise ${step.stepNumber}: ${step.equipmentName}</h3>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <span class="dwell-chip">⏱️ Model A Dwell: ${dwellMinutes} min</span>
+                                ${badgeHtml}
+                            </div>
+                        </div>
+                        <div style="color: #38bdf8; font-weight: 600; font-size: 15px; margin: 8px 0;">
+                            👉 Assigned Station: <b>${step.station}</b> &nbsp;|&nbsp; ⏰ Time Window: ${step.timeWindow}
+                        </div>
+                        <div style="display: flex; gap: 25px; margin: 12px 0; color: #f8fafc; font-size: 15px; flex-wrap: wrap;">
+                            <div>🎯 <b>Sets:</b> ${step.sets} Sets</div>
+                            <div>🔁 <b>Reps:</b> ${step.reps}</div>
+                            <div>⏱️ <b>Rest:</b> ${step.restSeconds}s ${is3Way ? '(Scaled for 3-Way)' : ''}</div>
+                        </div>
+                        <div style="color: #94a3b8; font-size: 13px; line-height: 1.5;">
+                            💡 <b>Coach Note:</b> ${step.coachNotes}
+                        </div>
+                        ${workingInHtml}
+                    `;
+
+                    container.appendChild(card);
+                });
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('workoutStepsContainer').innerHTML = "<div class='card' style='color: var(--accent-red);'>Error loading workout plan from database.</div>";
+            }
+        }
+
+        async function submitSuddenEntry() {
+            const arrivalTime = document.getElementById('quickTimeSelect').value;
+            const focusMuscle = document.getElementById('quickMuscleSelect').value;
+
+            try {
+                const res = await fetch('/api/member/sudden-entry', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: activeUsername,
+                        arrivalTime,
+                        focusMuscle
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const msgEl = document.getElementById('suddenMsg');
+                    msgEl.style.display = 'block';
+                    msgEl.innerText = `⚡ Sudden arrival at ${arrivalTime} processed! Re-optimized with Floor EUR ${data.eurScore}%.`;
+                    setTimeout(() => { msgEl.style.display = 'none'; }, 4000);
+                    fetchWorkout();
+                } else {
+                    alert(data.message || "Failed to process sudden entry.");
+                }
+            } catch (err) {
+                alert("Server error processing sudden entry.");
+            }
+        }
+
+        function startRestCountdown(timerId, totalSeconds, partner) {
+            if (activeTimers[timerId]) {
+                clearInterval(activeTimers[timerId]);
+            }
+
+            const timerEl = document.getElementById(timerId);
+            const statusEl = document.getElementById(`${timerId}_status`);
+            timerEl.style.display = 'inline-block';
+            let remaining = totalSeconds;
+            timerEl.innerText = `${remaining}s`;
+
+            if (partner && statusEl) {
+                statusEl.innerHTML = `🟢 <b>${partner}'s turn to lift!</b> Take deep recovery breaths.`;
+            }
+
+            activeTimers[timerId] = setInterval(() => {
+                remaining--;
+                if (remaining <= 0) {
+                    clearInterval(activeTimers[timerId]);
+                    timerEl.innerText = '0s';
+                    timerEl.style.color = '#10b981';
+                    if (partner && statusEl) {
+                        statusEl.innerHTML = `🔔 <b>Your rest is complete!</b> Step up to the machine for your next set.`;
+                    }
+                } else {
+                    timerEl.innerText = `${remaining}s`;
+                }
+            }, 1000);
+        }
+
+        fetchWorkout();
+    </script>
+</body>
+</html>

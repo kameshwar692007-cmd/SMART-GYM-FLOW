@@ -1,0 +1,149 @@
+{
+  "commercial_gym": {
+    "gym_id": "commercial_gym",
+    "name": "Metro Mega Fitness (Commercial Gym)",
+    "description": "Large high-volume gym with multiple duplicate stations, cables, and pin-loaded machines.",
+    "equipment_types": [
+      {
+        "type_id": "bench_press",
+        "name": "Barbell Bench Press",
+        "category": "Chest",
+        "quantity": 3,
+        "swap_types": ["dumbbell_bench", "chest_press_machine", "cable_crossover"]
+      },
+      {
+        "type_id": "dumbbell_bench",
+        "name": "Dumbbell Incline/Flat Bench",
+        "category": "Chest",
+        "quantity": 4,
+        "swap_types": ["bench_press", "chest_press_machine", "cable_crossover"]
+      },
+      {
+        "type_id": "chest_press_machine",
+        "name": "Seated Chest Press Machine",
+        "category": "Chest",
+        "quantity": 2,
+        "swap_types": ["dumbbell_bench", "bench_press", "cable_crossover"]
+      },
+      {
+        "type_id": "squat_rack",
+        "name": "Olympic Squat Rack",
+        "category": "Legs",
+        "quantity": 3,
+        "swap_types": ["leg_press", "hack_squat", "dumbbell_lunges"]
+      },
+      {
+        "type_id": "leg_press",
+        "name": "45-Degree Leg Press",
+        "category": "Legs",
+        "quantity": 2,
+        "swap_types": ["squat_rack", "hack_squat"]
+      },
+      {
+        "type_id": "hack_squat",
+        "name": "Plate Loaded Hack Squat",
+        "category": "Legs",
+        "quantity": 1,
+        "swap_types": ["leg_press", "squat_rack"]
+      },
+      {
+        "type_id": "lat_pulldown",
+        "name": "Lat Pulldown Station",
+        "category": "Back",
+        "quantity": 2,
+        "swap_types": ["seated_cable_row", "pullup_bar", "dumbbell_row"]
+      },
+      {
+        "type_id": "seated_cable_row",
+        "name": "Seated Cable Row",
+        "category": "Back",
+        "quantity": 2,
+        "swap_types": ["lat_pulldown", "dumbbell_row"]
+      },
+      {
+        "type_id": "cable_crossover",
+        "name": "Dual Adjustable Cable Crossover",
+        "category": "Full Body",
+        "quantity": 2,
+        "swap_types": ["lat_pulldown", "dumbbell_bench"]
+      }
+    ]
+  },
+  "hotel_gym": {
+    "gym_id": "hotel_gym",
+    "name": "Skyline Suites Gym (Compact Hotel)",
+    "description": "Compact boutique facility with single units and multi-purpose gear.",
+    "equipment_types": [
+      {
+        "type_id": "dumbbell_bench",
+        "name": "Adjustable Dumbbell Bench",
+        "category": "Chest",
+        "quantity": 1,
+        "swap_types": ["cable_multi_station"]
+      },
+      {
+        "type_id": "cable_multi_station",
+        "name": "Multi-Function Cable Tower",
+        "category": "Full Body",
+        "quantity": 1,
+        "swap_types": ["dumbbell_bench", "smith_machine"]
+      },
+      {
+        "type_id": "smith_machine",
+        "name": "Compact Smith Machine",
+        "category": "Legs",
+        "quantity": 1,
+        "swap_types": ["dumbbell_bench", "cable_multi_station"]
+      },
+      {
+        "type_id": "treadmill",
+        "name": "Commercial Treadmill",
+        "category": "Cardio",
+        "quantity": 2,
+        "swap_types": ["stationary_bike"]
+      },
+      {
+        "type_id": "stationary_bike",
+        "name": "Spin Bike",
+        "category": "Cardio",
+        "quantity": 1,
+        "swap_types": ["treadmill"]
+      }
+    ]
+  },
+  "powerlifting_box": {
+    "gym_id": "powerlifting_box",
+    "name": "Iron Forge Strength Box (Powerlifting / Barbell Club)",
+    "description": "Heavy strength club centered around racks, deadlift platforms, and competition benches.",
+    "equipment_types": [
+      {
+        "type_id": "comp_bench",
+        "name": "Competition Combo Bench",
+        "category": "Chest",
+        "quantity": 4,
+        "swap_types": ["power_cage"]
+      },
+      {
+        "type_id": "power_cage",
+        "name": "Power Rack with Monolift",
+        "category": "Legs",
+        "quantity": 5,
+        "swap_types": ["deadlift_platform", "comp_bench"]
+      },
+      {
+        "type_id": "deadlift_platform",
+        "name": "Wood & Rubber Deadlift Platform",
+        "category": "Back",
+        "quantity": 4,
+        "swap_types": ["power_cage"]
+      },
+      {
+        "type_id": "ghr_machine",
+        "name": "Glute Ham Developer (GHD)",
+        "category": "Legs",
+        "quantity": 2,
+        "swap_types": ["power_cage"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Gym Flow - Zero Wait Management</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container" style="max-width: 900px; text-align: center; margin-top: 50px; margin-bottom: 50px;">
+        <div style="margin-bottom: 30px;">
+            <div style="display: inline-block; background: #064e3b; border: 1px solid #10b981; color: #a7f3d0; padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 15px;">
+                💾 Persistent SQLite Database Connected &bull; Real-Time Multi-User System
+            </div>
+            <h1 style="font-size: 42px; font-weight: 800; margin-bottom: 12px; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                🏋️ Smart Gym Flow
+            </h1>
+            <p style="color: var(--text-secondary); font-size: 17px; max-width: 620px; margin: 0 auto; line-height: 1.5;">
+                AI-calibrated physical intake, persistent SQLite user authentication, automated machine allocation, and novel <b>"Working-In"</b> active-rest set interleaving.
+            </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 25px;">
+            <!-- Owner Card -->
+            <div class="card" style="text-align: left; border: 1px solid #4338ca; background: linear-gradient(180deg, #1e1b4b 0%, #151d2e 100%);">
+                <div style="font-size: 32px; margin-bottom: 12px;">🏢</div>
+                <h2 style="font-size: 22px; margin-bottom: 8px;">Gym Owner Portal</h2>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">
+                    Manage gym equipment inventory & physical stations, configure gym opening/closing hours, monitor live floor occupancy, and inspect the real-time SQLite member database.
+                </p>
+                <div style="font-size: 12px; color: #a5b4fc; margin-bottom: 16px;">
+                    Demo Account: <code>owner</code> / <code>admin123</code>
+                </div>
+                <a href="/owner/login" class="btn btn-primary" style="width: 100%; display: block; text-align: center;">Login as Gym Owner &rarr;</a>
+            </div>
+
+            <!-- Member Card -->
+            <div class="card" style="text-align: left; border: 1px solid #0284c7; background: linear-gradient(180deg, #082f49 0%, #151d2e 100%);">
+                <div style="font-size: 32px; margin-bottom: 12px;">👤</div>
+                <h2 style="font-size: 22px; margin-bottom: 8px;">Gym Member Portal</h2>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">
+                    Sign in with your username & password or register as a new member. Complete your biometric assessment (BMI gauge, height, weight sliders) to receive your tailored zero-wait workout.
+                </p>
+                <div style="font-size: 12px; color: #7dd3fc; margin-bottom: 16px;">
+                    Demo Accounts: <code>alex</code>, <code>marcus</code>, <code>sarah</code> (pass: <code>123</code>)
+                </div>
+                <a href="/member/login" class="btn btn-primary" style="width: 100%; display: block; text-align: center; background: linear-gradient(135deg, #0284c7, #2563eb);">Login / Register Member &rarr;</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 45px; padding: 16px; background: #0f172a; border: 1px solid #334155; border-radius: 10px; text-align: left; font-size: 13px; color: #94a3b8;">
+            <b style="color: #f8fafc;">✨ Core Architectural Novelty:</b>
+            <div style="margin-top: 6px; line-height: 1.6;">
+                When two lifters (e.g. Alex and Marcus) schedule the same station (e.g. Olympic Bench Press) during peak hour (08:00 AM), Smart Gym Flow synchronizes them to <b>alternate sets during each other's 75-second rest intervals</b>. Neither lifter waits, equipment throughput is doubled, and crowd congestion is eliminated!
+            </div>
+        </div>
+    </div>
+</body>
+</html>

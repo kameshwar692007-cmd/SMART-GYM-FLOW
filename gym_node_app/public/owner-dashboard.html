@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Owner Dashboard - Smart Gym</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+        .nav-tab:hover {
+            color: #f8fafc;
+            border-color: #3b82f6;
+        }
+        .nav-tab.active {
+            background-color: #2563eb;
+            color: #ffffff;
+            border-color: #3b82f6;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+        .kpi-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 10px;
+            padding: 16px;
+        }
+        .kpi-title {
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .kpi-value {
+            font-size: 28px;
+            font-weight: 800;
+            margin-top: 4px;
+        }
+
+        .badge-purple {
+            background-color: #581c87;
+            color: #f3e8ff;
+            border: 1px solid #a855f7;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .roi-card {
+            background: #111827;
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1100px; margin-top: 30px; margin-bottom: 60px;">
+        <div class="header-bar">
+            <div>
+                <span class="logo-text">🏢 Equipment Utility & Operations Dashboard</span>
+                <span style="color: var(--text-secondary); margin-left: 12px; font-size: 14px;">Iron Peak Fitness &bull; ML-OR FJSP Engine Connected</span>
+            </div>
+            <div>
+                <a href="/" class="btn btn-secondary" style="font-size: 13px; padding: 8px 16px;">Logout & Exit</a>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="switchTab('mlOrTab', this)">📈 ML-OR Utility Analytics & ROI</div>
+            <div class="nav-tab" onclick="switchTab('floorTab', this)">📊 Live Floor & 'Working-In' Monitor</div>
+            <div class="nav-tab" onclick="switchTab('equipmentTab', this)">🏋️ Equipment Fleet & Stations</div>
+            <div class="nav-tab" onclick="switchTab('spatialUtilTab', this)">🤖 Model B Spatial Heatmap</div>
+            <div class="nav-tab" onclick="switchTab('shortageTab', this)" id="shortageTabBtn">⚠️ Deficit Requisitions</div>
+            <div class="nav-tab" onclick="switchTab('membersTab', this)">👥 Member Database (SQLite)</div>
+        </div>
+
+        <!-- TAB 1: ML-OR UTILITY ANALYTICS & PROCUREMENT ROI -->
+        <div id="mlOrTab" class="tab-content active">
+            <!-- Operational KPI Bar -->
+            <div class="kpi-grid">
+                <div class="kpi-card" style="border-color: #10b981;">
+                    <div class="kpi-title">Equipment Utility Ratio (EUR)</div>
+                    <div id="kpiEur" class="kpi-value" style="color: #6ee7b7;">84.5%</div>
+                    <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">Active Set Time / (Active + Idle)</div>
+                </div>
+                <div class="kpi-card" style="border-color: #38bdf8;">
+                    <div class="kpi-title">Peak Station Idle Time Reduced</div>
+                    <div id="kpiIdleReduction" class="kpi-value" style="color: #38bdf8;">78.0%</div>
+                    <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">Via Adaptive Set Interleaving</div>
+                </div>
+                <div class="kpi-card" style="border-color: #a855f7;">
+                    <div class="kpi-title">Model A Dwell Time Precision</div>
+                    <div class="kpi-value" style="color: #d8b4fe;">MAE 0.52m</div>
+                    <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">R² = 0.980 (Gradient Boosting)</div>
+                </div>
+                <div class="kpi-card" style="border-color: #f59e0b;">
+                    <div class="kpi-title">Model B Spatial Precision</div>
+                    <div class="kpi-value" style="color: #fde68a;">WAPE 5.84%</div>
+                    <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">R² = 0.979 (Machine Categories)</div>
+                </div>
+            </div>
+
+            <!-- Bottleneck Intensity Scores (BIS) -->
+            <div class="card" style="margin-bottom: 24px;">
+                <h3 style="font-size: 18px; margin-bottom: 6px;">🎯 Bottleneck Intensity Score (BIS) by Machine Category</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+                    Quantitative queue pressure index formulated as: <code>BIS_k = [Wait Time / (Stations × Footprint)] × 100</code>
+                </p>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Equipment Category</th>
+                                <th>Floor Footprint</th>
+                                <th>Contention Level</th>
+                                <th>Bottleneck Intensity Score (BIS)</th>
+                                <th>Operational Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bisTableBody">
+                            <tr><td colspan="5" style="text-align: center;">Calculating BIS scores...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Procurement ROI Analytics -->
+            <div class="card">
+                <h3 style="font-size: 18px; margin-bottom: 6px;">💰 Predictive Equipment Procurement ROI Simulator</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 16px;">
+                    Simulates adding +1 station to high-BIS machines inside the FJSP constraint solver to forecast throughput boost and churn revenue retention.
+                </p>
+                <div id="procurementRoiContainer">
+                    <div style="color: var(--text-secondary); text-align: center;">Running operations simulation...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: LIVE FLOOR & WORKING-IN MONITOR -->
+        <div id="floorTab" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <div>
+                        <h2 style="font-size: 20px;">Floor Utilization & Adaptive Interleaving Matrix</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">Solved via FJSP with Model A Dwell Times (Solo, 2-Way Interleaved & 3-Way Cyclic Rotation).</p>
+                    </div>
+                    <div>
+                        <select id="timeFilterSelect" onchange="renderFloorGrid()" style="padding: 8px 12px; border-radius: 6px; background: #0f172a; color: #f8fafc; border: 1px solid #334155;">
+                            <option value="morning">Morning Peak (08:00 AM - 08:45 AM)</option>
+                            <option value="evening">Evening Peak (06:00 PM - 06:45 PM)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Active Set Sharing Notice Box -->
+                <div style="background: #1c1917; border: 1px solid #d97706; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                    <div style="font-weight: 700; color: #fde68a; margin-bottom: 6px;">
+                        ⚡ Real-Time Active Rest Set Sharing Deployments:
+                    </div>
+                    <div id="workingInList" style="color: #cbd5e1; font-size: 13px;">
+                        Scanning for paired members...
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table id="floorGridTable">
+                        <thead>
+                            <tr id="floorHeader">
+                                <th>Station / Machine</th>
+                                <th>08:00 AM</th>
+                                <th>08:15 AM</th>
+                                <th>08:30 AM</th>
+                                <th>08:45 AM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="floorBody">
+                            <tr><td colspan="5" style="text-align: center;">Loading live floor matrix...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: EQUIPMENT FLEET INVENTORY -->
+        <div id="equipmentTab" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <div>
+                        <h2 style="font-size: 20px;">Gym Equipment Inventory</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">Manage physical machines, number of stations, and backup swap alternatives.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="toggleAddModal()">+ Add New Machine</button>
+                </div>
+                
+                <table id="equipmentTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Equipment Name</th>
+                            <th>Muscle Group</th>
+                            <th>Stations</th>
+                            <th>Physical Station Tags</th>
+                            <th>Alternative Swap</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="equipmentBody">
+                        <tr><td colspan="7" style="text-align: center;">Loading inventory from SQLite database...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Add Equipment Form (Collapsible) -->
+            <div id="addModal" class="card" style="display: none; border: 1px solid var(--accent-blue);">
+                <h3 style="font-size: 18px; margin-bottom: 15px;">Add New Equipment to Floor</h3>
+                <form id="addEquipmentForm">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Machine Name</label>
+                            <input type="text" id="newEqName" placeholder="e.g. Pec Fly / Rear Delt Machine" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category / Muscle Group</label>
+                            <select id="newEqCat">
+                                <option value="Chest">Chest</option>
+                                <option value="Legs">Legs</option>
+                                <option value="Back">Back</option>
+                                <option value="Full Body">Full Body</option>
+                                <option value="Cardio">Cardio</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Physical Stations</label>
+                            <input type="number" id="newEqQty" min="1" max="10" value="2" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Alternative Equipment for Busy Swap</label>
+                            <input type="text" id="newEqSwap" placeholder="e.g. Incline Dumbbell Bench" required value="Incline Dumbbell Bench">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button type="submit" class="btn btn-primary">Save to Database & Floor</button>
+                        <button type="button" class="btn btn-secondary" onclick="toggleAddModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 4: MODEL B SPATIAL-TEMPORAL UTILIZATION HEATMAP -->
+        <div id="spatialUtilTab" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <h2 style="font-size: 20px;">🤖 Machine-Level Spatial-Temporal Utilization Forecaster</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">
+                            Model B predicts utilization rate <code>U_k,t ∈ [0, 1]</code> for specific machine groups across 15-minute time windows (WAPE = 5.84%).
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <label style="font-size: 13px; color: var(--text-secondary); margin: 0;">Forecast Day:</label>
+                        <select id="spatialDaySelect" onchange="loadSpatialUtilization()" style="padding: 8px 14px; border-radius: 6px; background: #0f172a; color: #f8fafc; border: 1px solid #334155;">
+                            <option value="Monday" selected>Monday (Chest & Push Peak)</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday (Leg Day Peak)</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday (Arms/Push)</option>
+                            <option value="Saturday">Saturday (Full Body/Cardio)</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time Slot</th>
+                                <th>Barbell Bench Press</th>
+                                <th>Olympic Squat Rack</th>
+                                <th>Cable Columns</th>
+                                <th>Incline Dumbbells</th>
+                                <th>45° Leg Press</th>
+                            </tr>
+                        </thead>
+                        <tbody id="spatialTableBody">
+                            <tr><td colspan="6" style="text-align: center;">Loading Model B spatial utilization matrix...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: EQUIPMENT SHORTAGE & DEFICIT REQUISITION REPORTS -->
+        <div id="shortageTab" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <div>
+                        <h2 style="font-size: 20px;">⚠️ Automated Equipment Deficit & Shortage Reports</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">
+                            Triggered when member demand exceeds maximum 3-way interleaved station capacity.
+                        </p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="loadUtilityAnalytics()">🔄 Refresh Shortage Analysis</button>
+                </div>
+
+                <div id="shortageAlertBanner" style="display: none; padding: 14px 18px; border-radius: 8px; background: #450a0a; border: 1px solid #ef4444; color: #fca5a5; margin-bottom: 18px;">
+                    <b style="font-size: 15px;">🚨 Immediate Attention Required:</b>
+                    <span id="shortageCountText">1 equipment deficit incident detected during peak hours!</span>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time Slot</th>
+                                <th>Machine in Shortage</th>
+                                <th>Category</th>
+                                <th>Current Stations</th>
+                                <th>Max 3-Way Capacity</th>
+                                <th>Procurement Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shortageBody">
+                            <tr><td colspan="6" style="text-align: center;">Scanning equipment demand vs supply...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: MEMBER DATABASE (SQLITE) -->
+        <div id="membersTab" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <div>
+                        <h2 style="font-size: 20px;">Registered Member Database (SQLite)</h2>
+                        <p style="color: var(--text-secondary); font-size: 13px;">
+                            Stored in SQLite (<code>gym.db</code>). Real-time member profiles, biometrics, and arrival times.
+                        </p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="loadMembersList()">🔄 Refresh Database</button>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Full Name</th>
+                                <th>Age / Gender</th>
+                                <th>Height / Weight</th>
+                                <th>Calculated BMI</th>
+                                <th>Arrival & Target</th>
+                                <th>Registration Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="membersBody">
+                            <tr><td colspan="8" style="text-align: center;">Loading members from SQLite database...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cachedFloorData = null;
+
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'mlOrTab') loadUtilityAnalytics();
+            if (tabId === 'floorTab') loadFloorSchedule();
+            if (tabId === 'spatialUtilTab') loadSpatialUtilization();
+            if (tabId === 'shortageTab') loadUtilityAnalytics();
+            if (tabId === 'membersTab') loadMembersList();
+            if (tabId === 'equipmentTab') loadEquipment();
+        }
+
+        function toggleAddModal() {
+            const modal = document.getElementById('addModal');
+            modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function loadUtilityAnalytics() {
+            try {
+                const res = await fetch('/api/owner/utility-analytics');
+                const data = await res.json();
+                if (!data.success || !data.analytics) return;
+
+                const a = data.analytics;
+                document.getElementById('kpiEur').innerText = `${a.equipmentUtilityRatio}%`;
+                document.getElementById('kpiIdleReduction').innerText = `${a.peakIdleReductionPercent}%`;
+
+                // Render BIS Table
+                const bisBody = document.getElementById('bisTableBody');
+                bisBody.innerHTML = '';
+                const footprints = { "Chest": "140 sq ft", "Legs": "160 sq ft", "Back": "110 sq ft", "Full Body": "120 sq ft" };
+
+                for (let [cat, score] of Object.entries(a.bottleneckIntensityScores)) {
+                    let badge = 'badge-green';
+                    let status = 'Low Queue Pressure';
+                    if (score >= 50) { badge = 'badge-red'; status = 'Critical Bottleneck'; }
+                    else if (score >= 25) { badge = 'badge-yellow'; status = 'Moderate Contention'; }
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><b>${cat}</b></td>
+                        <td>${footprints[cat] || '120 sq ft'}</td>
+                        <td><span class="badge ${badge}">${status}</span></td>
+                        <td><b style="font-size: 16px;">${score} / 100</b></td>
+                        <td style="color: #94a3b8; font-size: 13px;">${score >= 35 ? '⚠️ Capital addition recommended' : '🟢 Current stations sufficient'}</td>
+                    `;
+                    bisBody.appendChild(tr);
+                }
+
+                // Render Procurement ROI Cards
+                const roiContainer = document.getElementById('procurementRoiContainer');
+                roiContainer.innerHTML = '';
+                if (!a.procurementRoi || a.procurementRoi.length === 0) {
+                    roiContainer.innerHTML = `<div style="color: #10b981; text-align: center;">✅ All machine categories are currently balanced. No equipment purchases needed.</div>`;
+                } else {
+                    a.procurementRoi.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'roi-card';
+                        card.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <b style="font-size: 16px; color: #f8fafc;">💡 Procurement Recommendation: +1 ${item.candidateMachine}</b>
+                                <span class="badge badge-green">Projected ROI: ${item.monthlyRoiDollars}</span>
+                            </div>
+                            <div style="display: flex; gap: 20px; font-size: 13px; color: #cbd5e1; margin-bottom: 8px;">
+                                <div>🚀 <b>Throughput Boost:</b> <span style="color: #38bdf8;">${item.throughputIncreasePercent}</span></div>
+                                <div>⏱️ <b>Peak Queue Drop:</b> <span style="color: #10b981;">${item.projectedWaitReduction}</span></div>
+                                <div>🎯 <b>BIS Index:</b> <span style="color: #f59e0b;">${item.currentBis}</span></div>
+                            </div>
+                            <div style="font-size: 13px; color: #94a3b8; line-height: 1.4;">
+                                ${item.recommendation}
+                            </div>
+                        `;
+                        roiContainer.appendChild(card);
+                    });
+                }
+
+                // Render Shortage Tab
+                const shortageBody = document.getElementById('shortageBody');
+                shortageBody.innerHTML = '';
+                if (!data.shortages || data.shortages.length === 0) {
+                    document.getElementById('shortageAlertBanner').style.display = 'none';
+                    shortageBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #10b981;">✅ Zero equipment shortages detected!</td></tr>`;
+                } else {
+                    document.getElementById('shortageAlertBanner').style.display = 'block';
+                    document.getElementById('shortageCountText').innerText = `${data.shortages.length} deficit incident(s) detected during peak rush!`;
+                    data.shortages.forEach(s => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><b style="color: #f87171;">${s.timeSlot}</b></td>
+                            <td><b>${s.equipmentName}</b></td>
+                            <td><span class="badge badge-blue">${s.category}</span></td>
+                            <td>${s.currentStationCount} Stations</td>
+                            <td>${s.maxInterleavedCapacity} Lifters Max</td>
+                            <td style="color: #fde68a;">💡 <b>${s.recommendation}</b></td>
+                        `;
+                        shortageBody.appendChild(tr);
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function loadFloorSchedule() {
+            try {
+                const res = await fetch('/api/owner/floor-schedule');
+                const data = await res.json();
+                cachedFloorData = data.schedule;
+
+                const wList = document.getElementById('workingInList');
+                if (cachedFloorData.workingInPairings && cachedFloorData.workingInPairings.length > 0) {
+                    wList.innerHTML = cachedFloorData.workingInPairings.map(p => `
+                        <div style="margin-top: 6px; padding: 8px 12px; background: rgba(0,0,0,0.3); border-radius: 6px;">
+                            <span class="${p.mode === '3-Way' ? 'badge-purple' : 'badge-yellow'}" style="margin-right: 6px;">${p.mode} Rotation</span>
+                            <b style="color: #fde68a;">${p.station} at ${p.time}:</b> 
+                            <span style="color: #38bdf8;">${(p.lifters || []).join(', ')}</span> 
+                            — <i>${p.explanation}</i>
+                        </div>
+                    `).join('');
+                } else {
+                    wList.innerHTML = "No station sharing conflicts right now. All lifters have independent stations.";
+                }
+
+                renderFloorGrid();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function renderFloorGrid() {
+            if (!cachedFloorData) return;
+            const filter = document.getElementById('timeFilterSelect').value;
+            const slots = filter === 'morning' 
+                ? ["08:00 AM", "08:15 AM", "08:30 AM", "08:45 AM"] 
+                : ["06:00 PM", "06:15 PM", "06:30 PM", "06:45 PM"];
+
+            const thead = document.getElementById('floorHeader');
+            thead.innerHTML = `<th>Station / Machine</th>` + slots.map(s => `<th>${s}</th>`).join('');
+
+            const tbody = document.getElementById('floorBody');
+            tbody.innerHTML = '';
+            for (let [stn, slotMap] of Object.entries(cachedFloorData.stationGrid)) {
+                const tr = document.createElement('tr');
+                let cols = `<td><b>${stn}</b></td>`;
+                slots.forEach(s => {
+                    const occupants = slotMap[s] || [];
+                    if (occupants.length >= 3) {
+                        cols += `<td><span class="badge-purple">⚡ 3-Way: ${occupants.slice(0, 3).join(', ')}</span></td>`;
+                    } else if (occupants.length === 2) {
+                        cols += `<td><span style="color: #f59e0b; font-weight: bold;">🤝 ${occupants[0]} & ${occupants[1]} (2-Way)</span></td>`;
+                    } else if (occupants.length === 1) {
+                        cols += `<td><span style="color: #38bdf8; font-weight: 600;">👤 ${occupants[0]}</span></td>`;
+                    } else {
+                        cols += `<td style="color: #10b981;">🟢 Free</td>`;
+                    }
+                });
+                tr.innerHTML = cols;
+                tbody.appendChild(tr);
+            }
+        }
+
+        async function loadSpatialUtilization() {
+            try {
+                const day = document.getElementById('spatialDaySelect').value;
+                const res = await fetch(`/api/ai/station-utilization?day=${day}`);
+                const data = await res.json();
+                if (!data.success || !data.forecast) return;
+
+                const matrix = data.forecast.matrix;
+                const tbody = document.getElementById('spatialTableBody');
+                tbody.innerHTML = '';
+
+                for (let [timeSlot, row] of Object.entries(matrix)) {
+                    const formatCell = (val) => {
+                        const pct = Math.round(val * 100);
+                        let col = '#10b981';
+                        if (pct >= 80) col = '#ef4444';
+                        else if (pct >= 55) col = '#f59e0b';
+                        return `<span style="color: ${col}; font-weight: 700;">${pct}%</span>`;
+                    };
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><b>${timeSlot}</b></td>
+                        <td>${formatCell(row.Barbell_Bench_Press)}</td>
+                        <td>${formatCell(row.Olympic_Squat_Rack)}</td>
+                        <td>${formatCell(row.Cable_Crossover_Columns)}</td>
+                        <td>${formatCell(row.Incline_Dumbbell_Area)}</td>
+                        <td>${formatCell(row.Leg_Press_45Deg)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function loadEquipment() {
+            try {
+                const res = await fetch('/api/owner/equipment');
+                const data = await res.json();
+                const tbody = document.getElementById('equipmentBody');
+                tbody.innerHTML = '';
+                data.equipment.forEach(eq => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><b>${eq.id}</b></td>
+                        <td><b>${eq.name}</b></td>
+                        <td><span class="badge badge-blue">${eq.category}</span></td>
+                        <td>${eq.quantity} Units</td>
+                        <td style="color: #94a3b8; font-size: 13px;">${(eq.stations || []).join(', ')}</td>
+                        <td style="color: #cbd5e1;">${eq.swap_alternative || 'None'}</td>
+                        <td><span class="badge badge-green">${eq.status || 'Active'}</span></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function loadMembersList() {
+            try {
+                const res = await fetch('/api/owner/members');
+                const data = await res.json();
+                const tbody = document.getElementById('membersBody');
+                tbody.innerHTML = '';
+                if (!data.members || data.members.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="8" style="text-align: center;">No members found.</td></tr>`;
+                    return;
+                }
+
+                data.members.forEach(m => {
+                    let bmiBadgeClass = 'badge-green';
+                    if (m.bmi >= 25.0 && m.bmi < 30.0) bmiBadgeClass = 'badge-yellow';
+                    else if (m.bmi >= 30.0) bmiBadgeClass = 'badge-red';
+                    else if (m.bmi < 18.5) bmiBadgeClass = 'badge-blue';
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>#${m.id}</td>
+                        <td><code>@${m.username}</code></td>
+                        <td><b>${m.full_name}</b></td>
+                        <td>${m.age || '--'} yrs &bull; ${m.gender || '--'}</td>
+                        <td>${m.height_cm || '--'} cm / ${m.weight_kg || '--'} kg</td>
+                        <td><span class="badge ${bmiBadgeClass}">${m.bmi || '--'} (${(m.bmi_category || 'Normal').split(' ')[0]})</span></td>
+                        <td><b>${m.arrival_time || '08:00 AM'}</b> &bull; ${m.focus_muscle || 'Chest'}</td>
+                        <td style="color: #94a3b8; font-size: 12px;">${m.created_at || 'Recent'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Initialize with default analytics
+        loadUtilityAnalytics();
+    </script>
+</body>
+</html>

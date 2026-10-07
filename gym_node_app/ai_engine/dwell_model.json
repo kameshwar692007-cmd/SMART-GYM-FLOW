@@ -1,0 +1,35 @@
+{
+  "model_name": "StationDwellRegressor_v2",
+  "features": [
+    "equip_cat",
+    "muscle_group",
+    "set_volume",
+    "rep_range_type",
+    "experience",
+    "sharing_mode"
+  ],
+  "metrics": {
+    "r2_score": 0.9798,
+    "mae_minutes": 0.523,
+    "rmse_minutes": 0.657
+  },
+  "feature_importances": {
+    "equip_cat": 0.0699,
+    "muscle_group": 0.0004,
+    "set_volume": 0.1894,
+    "rep_range_type": 0.1438,
+    "experience": 0.0361,
+    "sharing_mode": 0.5604
+  },
+  "coefficients": {
+    "intercept": 1.214,
+    "weights": {
+      "equip_cat": -0.679,
+      "muscle_group": 0.0066,
+      "set_volume": 2.8067,
+      "rep_range_type": -2.2333,
+      "experience": -1.1147,
+      "sharing_mode": 4.1742
+    }
+  }
+}

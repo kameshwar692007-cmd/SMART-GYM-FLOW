@@ -1,0 +1,975 @@
+{
+  "model_name": "GymCrowdForecaster_v1",
+  "metrics": {
+    "r2_score": 0.9467,
+    "mae": 4.28
+  },
+  "hourly_profiles": {
+    "Monday": {
+      "06:00 AM": {
+        "hour_24": 6,
+        "predicted_crowd": 14,
+        "capacity_percent": 18,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 AM": {
+        "hour_24": 7,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "08:00 AM": {
+        "hour_24": 8,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "09:00 AM": {
+        "hour_24": 9,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "10:00 AM": {
+        "hour_24": 10,
+        "predicted_crowd": 14,
+        "capacity_percent": 18,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "11:00 AM": {
+        "hour_24": 11,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "12:00 PM": {
+        "hour_24": 12,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "01:00 PM": {
+        "hour_24": 13,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "02:00 PM": {
+        "hour_24": 14,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "03:00 PM": {
+        "hour_24": 15,
+        "predicted_crowd": 15,
+        "capacity_percent": 19,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "04:00 PM": {
+        "hour_24": 16,
+        "predicted_crowd": 14,
+        "capacity_percent": 18,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "05:00 PM": {
+        "hour_24": 17,
+        "predicted_crowd": 89,
+        "capacity_percent": 111,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "06:00 PM": {
+        "hour_24": 18,
+        "predicted_crowd": 89,
+        "capacity_percent": 111,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "07:00 PM": {
+        "hour_24": 19,
+        "predicted_crowd": 89,
+        "capacity_percent": 111,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "08:00 PM": {
+        "hour_24": 20,
+        "predicted_crowd": 89,
+        "capacity_percent": 111,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "09:00 PM": {
+        "hour_24": 21,
+        "predicted_crowd": 22,
+        "capacity_percent": 28,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 PM": {
+        "hour_24": 22,
+        "predicted_crowd": 22,
+        "capacity_percent": 28,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      }
+    },
+    "Tuesday": {
+      "06:00 AM": {
+        "hour_24": 6,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 AM": {
+        "hour_24": 7,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "08:00 AM": {
+        "hour_24": 8,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "09:00 AM": {
+        "hour_24": 9,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "10:00 AM": {
+        "hour_24": 10,
+        "predicted_crowd": 14,
+        "capacity_percent": 18,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "11:00 AM": {
+        "hour_24": 11,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "12:00 PM": {
+        "hour_24": 12,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "01:00 PM": {
+        "hour_24": 13,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "02:00 PM": {
+        "hour_24": 14,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "03:00 PM": {
+        "hour_24": 15,
+        "predicted_crowd": 14,
+        "capacity_percent": 18,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "04:00 PM": {
+        "hour_24": 16,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "05:00 PM": {
+        "hour_24": 17,
+        "predicted_crowd": 86,
+        "capacity_percent": 108,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "06:00 PM": {
+        "hour_24": 18,
+        "predicted_crowd": 86,
+        "capacity_percent": 108,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "07:00 PM": {
+        "hour_24": 19,
+        "predicted_crowd": 86,
+        "capacity_percent": 108,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "08:00 PM": {
+        "hour_24": 20,
+        "predicted_crowd": 86,
+        "capacity_percent": 108,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "09:00 PM": {
+        "hour_24": 21,
+        "predicted_crowd": 21,
+        "capacity_percent": 26,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 PM": {
+        "hour_24": 22,
+        "predicted_crowd": 22,
+        "capacity_percent": 28,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      }
+    },
+    "Wednesday": {
+      "06:00 AM": {
+        "hour_24": 6,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 AM": {
+        "hour_24": 7,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "08:00 AM": {
+        "hour_24": 8,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "09:00 AM": {
+        "hour_24": 9,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "10:00 AM": {
+        "hour_24": 10,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "11:00 AM": {
+        "hour_24": 11,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "12:00 PM": {
+        "hour_24": 12,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "01:00 PM": {
+        "hour_24": 13,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "02:00 PM": {
+        "hour_24": 14,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "03:00 PM": {
+        "hour_24": 15,
+        "predicted_crowd": 12,
+        "capacity_percent": 15,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "04:00 PM": {
+        "hour_24": 16,
+        "predicted_crowd": 12,
+        "capacity_percent": 15,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "05:00 PM": {
+        "hour_24": 17,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "06:00 PM": {
+        "hour_24": 18,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "07:00 PM": {
+        "hour_24": 19,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "08:00 PM": {
+        "hour_24": 20,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "09:00 PM": {
+        "hour_24": 21,
+        "predicted_crowd": 19,
+        "capacity_percent": 24,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 PM": {
+        "hour_24": 22,
+        "predicted_crowd": 20,
+        "capacity_percent": 25,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      }
+    },
+    "Thursday": {
+      "06:00 AM": {
+        "hour_24": 6,
+        "predicted_crowd": 12,
+        "capacity_percent": 15,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 AM": {
+        "hour_24": 7,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "08:00 AM": {
+        "hour_24": 8,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "09:00 AM": {
+        "hour_24": 9,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "10:00 AM": {
+        "hour_24": 10,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "11:00 AM": {
+        "hour_24": 11,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "12:00 PM": {
+        "hour_24": 12,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "01:00 PM": {
+        "hour_24": 13,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "02:00 PM": {
+        "hour_24": 14,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "03:00 PM": {
+        "hour_24": 15,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "04:00 PM": {
+        "hour_24": 16,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "05:00 PM": {
+        "hour_24": 17,
+        "predicted_crowd": 74,
+        "capacity_percent": 92,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "06:00 PM": {
+        "hour_24": 18,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "07:00 PM": {
+        "hour_24": 19,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "08:00 PM": {
+        "hour_24": 20,
+        "predicted_crowd": 74,
+        "capacity_percent": 92,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "09:00 PM": {
+        "hour_24": 21,
+        "predicted_crowd": 20,
+        "capacity_percent": 25,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 PM": {
+        "hour_24": 22,
+        "predicted_crowd": 21,
+        "capacity_percent": 26,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      }
+    },
+    "Friday": {
+      "06:00 AM": {
+        "hour_24": 6,
+        "predicted_crowd": 12,
+        "capacity_percent": 15,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 AM": {
+        "hour_24": 7,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "08:00 AM": {
+        "hour_24": 8,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "09:00 AM": {
+        "hour_24": 9,
+        "predicted_crowd": 53,
+        "capacity_percent": 66,
+        "status": "Moderate Traffic",
+        "level": "moderate",
+        "color": "#f59e0b"
+      },
+      "10:00 AM": {
+        "hour_24": 10,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "11:00 AM": {
+        "hour_24": 11,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "12:00 PM": {
+        "hour_24": 12,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "01:00 PM": {
+        "hour_24": 13,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "02:00 PM": {
+        "hour_24": 14,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "03:00 PM": {
+        "hour_24": 15,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "04:00 PM": {
+        "hour_24": 16,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "05:00 PM": {
+        "hour_24": 17,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "06:00 PM": {
+        "hour_24": 18,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "07:00 PM": {
+        "hour_24": 19,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "08:00 PM": {
+        "hour_24": 20,
+        "predicted_crowd": 75,
+        "capacity_percent": 94,
+        "status": "Bottleneck Alert (High Rush)",
+        "level": "high",
+        "color": "#ef4444"
+      },
+      "09:00 PM": {
+        "hour_24": 21,
+        "predicted_crowd": 20,
+        "capacity_percent": 25,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 PM": {
+        "hour_24": 22,
+        "predicted_crowd": 21,
+        "capacity_percent": 26,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      }
+    },
+    "Saturday": {
+      "06:00 AM": {
+        "hour_24": 6,
+        "predicted_crowd": 9,
+        "capacity_percent": 11,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 AM": {
+        "hour_24": 7,
+        "predicted_crowd": 16,
+        "capacity_percent": 20,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "08:00 AM": {
+        "hour_24": 8,
+        "predicted_crowd": 16,
+        "capacity_percent": 20,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "09:00 AM": {
+        "hour_24": 9,
+        "predicted_crowd": 16,
+        "capacity_percent": 20,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 AM": {
+        "hour_24": 10,
+        "predicted_crowd": 10,
+        "capacity_percent": 12,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "11:00 AM": {
+        "hour_24": 11,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "12:00 PM": {
+        "hour_24": 12,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "01:00 PM": {
+        "hour_24": 13,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "02:00 PM": {
+        "hour_24": 14,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "03:00 PM": {
+        "hour_24": 15,
+        "predicted_crowd": 10,
+        "capacity_percent": 12,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "04:00 PM": {
+        "hour_24": 16,
+        "predicted_crowd": 10,
+        "capacity_percent": 12,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "05:00 PM": {
+        "hour_24": 17,
+        "predicted_crowd": 24,
+        "capacity_percent": 30,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "06:00 PM": {
+        "hour_24": 18,
+        "predicted_crowd": 25,
+        "capacity_percent": 31,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 PM": {
+        "hour_24": 19,
+        "predicted_crowd": 25,
+        "capacity_percent": 31,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "08:00 PM": {
+        "hour_24": 20,
+        "predicted_crowd": 24,
+        "capacity_percent": 30,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "09:00 PM": {
+        "hour_24": 21,
+        "predicted_crowd": 14,
+        "capacity_percent": 18,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 PM": {
+        "hour_24": 22,
+        "predicted_crowd": 13,
+        "capacity_percent": 16,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      }
+    },
+    "Sunday": {
+      "06:00 AM": {
+        "hour_24": 6,
+        "predicted_crowd": 10,
+        "capacity_percent": 12,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 AM": {
+        "hour_24": 7,
+        "predicted_crowd": 16,
+        "capacity_percent": 20,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "08:00 AM": {
+        "hour_24": 8,
+        "predicted_crowd": 16,
+        "capacity_percent": 20,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "09:00 AM": {
+        "hour_24": 9,
+        "predicted_crowd": 16,
+        "capacity_percent": 20,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 AM": {
+        "hour_24": 10,
+        "predicted_crowd": 10,
+        "capacity_percent": 12,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "11:00 AM": {
+        "hour_24": 11,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "12:00 PM": {
+        "hour_24": 12,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "01:00 PM": {
+        "hour_24": 13,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "02:00 PM": {
+        "hour_24": 14,
+        "predicted_crowd": 29,
+        "capacity_percent": 36,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "03:00 PM": {
+        "hour_24": 15,
+        "predicted_crowd": 10,
+        "capacity_percent": 12,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "04:00 PM": {
+        "hour_24": 16,
+        "predicted_crowd": 9,
+        "capacity_percent": 11,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "05:00 PM": {
+        "hour_24": 17,
+        "predicted_crowd": 23,
+        "capacity_percent": 29,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "06:00 PM": {
+        "hour_24": 18,
+        "predicted_crowd": 25,
+        "capacity_percent": 31,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "07:00 PM": {
+        "hour_24": 19,
+        "predicted_crowd": 24,
+        "capacity_percent": 30,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "08:00 PM": {
+        "hour_24": 20,
+        "predicted_crowd": 23,
+        "capacity_percent": 29,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "09:00 PM": {
+        "hour_24": 21,
+        "predicted_crowd": 15,
+        "capacity_percent": 19,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      },
+      "10:00 PM": {
+        "hour_24": 22,
+        "predicted_crowd": 15,
+        "capacity_percent": 19,
+        "status": "Low Traffic (Ideal Flow)",
+        "level": "low",
+        "color": "#10b981"
+      }
+    }
+  }
+}

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biometric Assessment - Smart Gym</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .bmi-gauge-box {
+            background-color: #0f172a;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            margin-top: 15px;
+            text-align: center;
+        }
+        .bmi-number {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+        .ai-forecast-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            border: 1px solid #6366f1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 15px;
+        }
+        .user-tag {
+            background: #0369a1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #f0f9ff;
+            font-weight: 600;
+        }
+        .ai-chip {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid #818cf8;
+            color: #c7d2fe;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 900px; margin-top: 40px; margin-bottom: 50px;">
+        <div class="header-bar">
+            <div>
+                <span class="logo-text">🩺 Member Biometric Intake</span>
+                <span id="userBadge" class="user-tag" style="margin-left: 10px;">Guest</span>
+            </div>
+            <div>
+                <a href="/member/workout" class="btn btn-secondary" style="font-size: 13px; padding: 8px 14px; margin-right: 8px;">View Current Plan &rarr;</a>
+                <a href="/member/login" class="btn btn-secondary" style="font-size: 13px; padding: 8px 14px;">Switch User</a>
+            </div>
+        </div>
+
+        <div id="saveToast" style="display: none; padding: 12px 16px; border-radius: 8px; background: #064e3b; border: 1px solid #10b981; color: #a7f3d0; margin-bottom: 20px; font-weight: 600;">
+            💾 Biometrics & AI Calibrations Saved to Database! Forwarding to your Zero-Wait Workout Plan...
+        </div>
+
+        <div class="card">
+            <h2 style="font-size: 22px; margin-bottom: 6px;">Calibrate Your Physical Profile & AI Training Plan</h2>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">
+                Inputs are fed into <b>Model A (Biometric Calibrator, R² = 0.988)</b> to predict your exact calorie expenditure, optimal heart rate training zone, and personalized rest intervals.
+            </p>
+
+            <form id="assessmentForm">
+                <div class="grid-2">
+                    <!-- Left: Biometrics -->
+                    <div>
+                        <div class="form-group">
+                            <label>Your Full Name</label>
+                            <input type="text" id="nameInput" placeholder="e.g. Jordan Reed" required value="Alex Miller">
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select id="genderSelect" onchange="runAiInference()">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" id="ageInput" value="25" min="14" max="80" required oninput="runAiInference()">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Height (cm): <span id="heightDisplay" class="slider-val">175 cm</span></label>
+                            <input type="range" id="heightSlider" min="130" max="215" value="175" step="1" oninput="updateBmiLive()">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Weight (kg): <span id="weightDisplay" class="slider-val">72 kg</span></label>
+                            <input type="range" id="weightSlider" min="40" max="150" value="72" step="0.5" oninput="updateBmiLive()">
+                        </div>
+
+                        <!-- Live BMI Gauge -->
+                        <div class="bmi-gauge-box">
+                            <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; font-weight: 700;">Database Calculated BMI</div>
+                            <div id="bmiVal" class="bmi-number">23.5</div>
+                            <div id="bmiCategory" style="font-size: 15px; font-weight: 700; color: #f8fafc; margin-top: 2px;">Normal / Healthy Weight</div>
+                        </div>
+
+                        <!-- Live AI Model A Forecast Box -->
+                        <div class="ai-forecast-box">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-weight: 700; color: #c7d2fe; font-size: 13px;">🤖 AI METABOLIC FORECAST</span>
+                                <span class="ai-chip">Model A &bull; R² 0.988</span>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;">
+                                <div style="background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 6px;">
+                                    <div style="color: #94a3b8; font-size: 11px;">EST. CALORIES BURNED</div>
+                                    <div id="aiCalories" style="color: #38bdf8; font-size: 20px; font-weight: 800;">450 kcal</div>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 6px;">
+                                    <div style="color: #94a3b8; font-size: 11px;">TARGET HEART RATE</div>
+                                    <div id="aiBpm" style="color: #f43f5e; font-size: 20px; font-weight: 800;">145 BPM</div>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 6px;">
+                                    <div style="color: #94a3b8; font-size: 11px;">AI OPTIMAL REST</div>
+                                    <div id="aiRest" style="color: #f59e0b; font-size: 20px; font-weight: 800;">75s / set</div>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 6px;">
+                                    <div style="color: #94a3b8; font-size: 11px;">INTENSITY PROFILE</div>
+                                    <div id="aiIntensity" style="color: #10b981; font-size: 13px; font-weight: 700; margin-top: 4px;">Hypertrophy</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Goals & Time -->
+                    <div>
+                        <div class="form-group">
+                            <label>Primary Fitness Goal</label>
+                            <select id="goalSelect" onchange="runAiInference()">
+                                <option value="Bodybuilding (Muscle Mass)">Bodybuilding (Hypertrophy / Muscle Gain)</option>
+                                <option value="Fat Loss & Lean Definition">Fat Loss & High Metabolic Tone</option>
+                                <option value="Strength & Power (Powerlifting)">Strength & Power (Heavy Compound Overload)</option>
+                                <option value="General Fitness & Toning">General Health, Posture & Stamina</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Training Experience Level</label>
+                            <select id="experienceSelect" onchange="runAiInference()">
+                                <option value="Beginner (Fresher)">Beginner (Fresher - First 1-2 weeks)</option>
+                                <option value="Intermediate" selected>Intermediate (6+ months training)</option>
+                                <option value="Advanced">Advanced (Consistent lifter / athlete)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Session Workout Duration</label>
+                            <select id="durationSelect" onchange="runAiInference()">
+                                <option value="45" selected>45 Minutes (Standard 3-Exercise Multi-Set Block)</option>
+                                <option value="30">30 Minutes (Express Circuit)</option>
+                                <option value="60">60 Minutes (High Volume)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>⏰ Preferred Gym Arrival Time</label>
+                            <select id="timeSelect">
+                                <option value="06:00 AM">06:00 AM (Early Facility Open)</option>
+                                <option value="07:00 AM">07:00 AM</option>
+                                <option value="07:30 AM">07:30 AM</option>
+                                <option value="08:00 AM" selected>08:00 AM (Morning Peak)</option>
+                                <option value="08:15 AM">08:15 AM</option>
+                                <option value="08:30 AM">08:30 AM</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="05:00 PM">05:00 PM</option>
+                                <option value="05:30 PM">05:30 PM</option>
+                                <option value="06:00 PM">06:00 PM (Evening Peak)</option>
+                                <option value="06:30 PM">06:30 PM</option>
+                                <option value="07:00 PM">07:00 PM</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Target Muscle Group for Today</label>
+                            <select id="muscleSelect">
+                                <option value="Chest" selected>Chest (Push Focus)</option>
+                                <option value="Legs">Legs (Quads, Hamstrings & Glutes)</option>
+                                <option value="Back">Back (Lats, Traps & Pull)</option>
+                                <option value="Full Body">Full Body Compound Circuit</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px; padding: 14px; font-size: 16px; background: linear-gradient(135deg, #0284c7, #2563eb);">
+                            💾 Save to Database & Generate AI Workout
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const activeUsername = localStorage.getItem('activeUsername') || 'alex';
+        const activeName = localStorage.getItem('activeMemberName') || 'Alex Miller';
+
+        document.getElementById('userBadge').innerText = `@${activeUsername} (${activeName})`;
+        document.getElementById('nameInput').value = activeName;
+
+        let aiDebounce = null;
+
+        async function loadStoredBiometrics() {
+            try {
+                const res = await fetch(`/api/member/profile/${encodeURIComponent(activeUsername)}`);
+                const data = await res.json();
+                if (data.success && data.user) {
+                    const u = data.user;
+                    if (u.name) document.getElementById('nameInput').value = u.name;
+                    if (u.gender) document.getElementById('genderSelect').value = u.gender;
+                    if (u.age) document.getElementById('ageInput').value = u.age;
+                    if (u.heightCm) document.getElementById('heightSlider').value = u.heightCm;
+                    if (u.weightKg) document.getElementById('weightSlider').value = u.weightKg;
+                    if (u.goal) document.getElementById('goalSelect').value = u.goal;
+                    if (u.experience) document.getElementById('experienceSelect').value = u.experience;
+                    if (u.todayArrivalTime) document.getElementById('timeSelect').value = u.todayArrivalTime;
+                    if (u.focusMuscle) document.getElementById('muscleSelect').value = u.focusMuscle;
+                    if (u.durationMins) document.getElementById('durationSelect').value = u.durationMins;
+                    updateBmiLive();
+                }
+            } catch (err) {
+                updateBmiLive();
+            }
+        }
+
+        function updateBmiLive() {
+            const h = parseFloat(document.getElementById('heightSlider').value);
+            const w = parseFloat(document.getElementById('weightSlider').value);
+
+            document.getElementById('heightDisplay').innerText = h + ' cm';
+            document.getElementById('weightDisplay').innerText = w + ' kg';
+
+            const hM = h / 100.0;
+            const bmi = (w / (hM * hM)).toFixed(1);
+            const bmiEl = document.getElementById('bmiVal');
+            const catEl = document.getElementById('bmiCategory');
+
+            bmiEl.innerText = bmi;
+
+            if (bmi < 18.5) {
+                bmiEl.style.color = "#38bdf8";
+                catEl.innerText = "Underweight (Focus on Lean Surplus)";
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                bmiEl.style.color = "#10b981";
+                catEl.innerText = "Normal / Healthy Weight";
+            } else if (bmi >= 25.0 && bmi <= 29.9) {
+                bmiEl.style.color = "#f59e0b";
+                catEl.innerText = "Overweight / High Density";
+            } else {
+                bmiEl.style.color = "#ef4444";
+                catEl.innerText = "Obese Range (Joint-Safe)";
+            }
+
+            runAiInference();
+        }
+
+        async function runAiInference() {
+            clearTimeout(aiDebounce);
+            aiDebounce = setTimeout(async () => {
+                const age = document.getElementById('ageInput').value;
+                const gender = document.getElementById('genderSelect').value;
+                const heightCm = document.getElementById('heightSlider').value;
+                const weightKg = document.getElementById('weightSlider').value;
+                const goal = document.getElementById('goalSelect').value;
+                const experience = document.getElementById('experienceSelect').value;
+                const durationMins = document.getElementById('durationSelect').value;
+
+                try {
+                    const res = await fetch('/api/ai/predict-biometrics', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ age, gender, heightCm, weightKg, goal, experience, durationMins })
+                    });
+                    const data = await res.json();
+                    if (data.success && data.predictions) {
+                        const p = data.predictions;
+                        document.getElementById('aiCalories').innerText = `${p.predictedCalories} kcal`;
+                        document.getElementById('aiBpm').innerText = `${p.targetAvgBpm} BPM`;
+                        document.getElementById('aiRest').innerText = `${p.optimalRestSeconds}s / set`;
+                        document.getElementById('aiIntensity').innerText = p.intensityLevel;
+                    }
+                } catch (e) {
+                    console.error("AI inference error", e);
+                }
+            }, 150);
+        }
+
+        document.getElementById('assessmentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('nameInput').value.trim();
+            const gender = document.getElementById('genderSelect').value;
+            const age = document.getElementById('ageInput').value;
+            const heightCm = document.getElementById('heightSlider').value;
+            const weightKg = document.getElementById('weightSlider').value;
+            const goal = document.getElementById('goalSelect').value;
+            const experience = document.getElementById('experienceSelect').value;
+            const arrivalTime = document.getElementById('timeSelect').value;
+            const focusMuscle = document.getElementById('muscleSelect').value;
+            const durationMins = document.getElementById('durationSelect').value;
+
+            try {
+                const res = await fetch('/api/member/assessment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: activeUsername,
+                        name: fullName,
+                        gender,
+                        age,
+                        heightCm,
+                        weightKg,
+                        goal,
+                        experience,
+                        arrivalTime,
+                        focusMuscle,
+                        durationMins
+                    })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    localStorage.setItem('activeMemberName', fullName);
+                    const toast = document.getElementById('saveToast');
+                    toast.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = '/member/workout';
+                    }, 800);
+                } else {
+                    alert(data.message || "Failed to save assessment.");
+                }
+            } catch (err) {
+                alert("Failed to communicate with SQLite database.");
+            }
+        });
+
+        loadStoredBiometrics();
+    </script>
+</body>
+</html>

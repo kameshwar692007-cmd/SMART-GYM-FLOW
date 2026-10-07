@@ -1,0 +1,70 @@
+{
+  "model_name": "BiometricMetabolicCalibrator_v1",
+  "features": [
+    "age",
+    "gender",
+    "height_m",
+    "weight_kg",
+    "bmi",
+    "experience",
+    "workout_type",
+    "duration_mins"
+  ],
+  "metrics": {
+    "calorie_r2": 0.988,
+    "calorie_mae": 13.67,
+    "bpm_r2": 0.9213,
+    "rest_r2": 0.9896
+  },
+  "feature_importances": {
+    "age": 0.0004,
+    "gender": 0.0,
+    "height_m": 0.0007,
+    "weight_kg": 0.2248,
+    "bmi": 0.0007,
+    "experience": 0.0201,
+    "workout_type": 0.3038,
+    "duration_mins": 0.4495
+  },
+  "coefficients": {
+    "calories": {
+      "intercept": -251.111,
+      "weights": {
+        "age": -0.1089,
+        "gender": 0.6506,
+        "height_m": -58.5694,
+        "weight_kg": 6.1058,
+        "bmi": -1.7943,
+        "experience": 30.6117,
+        "workout_type": -73.9225,
+        "duration_mins": 9.2642
+      }
+    },
+    "avg_bpm": {
+      "intercept": 166.107,
+      "weights": {
+        "age": -0.7259,
+        "gender": 0.1574,
+        "height_m": 1.7028,
+        "weight_kg": -0.0079,
+        "bmi": -0.0302,
+        "experience": 3.4841,
+        "workout_type": -10.7523,
+        "duration_mins": 0.0115
+      }
+    },
+    "optimal_rest": {
+      "intercept": 42.712,
+      "weights": {
+        "age": 0.0673,
+        "gender": -0.7966,
+        "height_m": -9.5771,
+        "weight_kg": -0.0153,
+        "bmi": 2.1023,
+        "experience": -7.9045,
+        "workout_type": 9.2172,
+        "duration_mins": -0.111
+      }
+    }
+  }
+}

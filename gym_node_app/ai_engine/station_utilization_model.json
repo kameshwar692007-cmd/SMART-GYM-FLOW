@@ -1,0 +1,864 @@
+{
+  "model_name": "MachineSpatialTemporalUtilForecaster_v2",
+  "metrics": {
+    "r2_score": 0.9788,
+    "wape_percent": 5.84,
+    "mae_index": 0.028
+  },
+  "machine_groups": [
+    "Barbell_Bench_Press",
+    "Olympic_Squat_Rack",
+    "Cable_Crossover_Columns",
+    "Incline_Dumbbell_Area",
+    "Leg_Press_45Deg"
+  ],
+  "spatial_forecast_matrix": {
+    "Monday": {
+      "06:00 AM": {
+        "Barbell_Bench_Press": 0.266,
+        "Olympic_Squat_Rack": 0.183,
+        "Cable_Crossover_Columns": 0.189,
+        "Incline_Dumbbell_Area": 0.215,
+        "Leg_Press_45Deg": 0.16
+      },
+      "07:00 AM": {
+        "Barbell_Bench_Press": 0.979,
+        "Olympic_Squat_Rack": 0.7,
+        "Cable_Crossover_Columns": 0.744,
+        "Incline_Dumbbell_Area": 0.818,
+        "Leg_Press_45Deg": 0.664
+      },
+      "08:00 AM": {
+        "Barbell_Bench_Press": 0.979,
+        "Olympic_Squat_Rack": 0.7,
+        "Cable_Crossover_Columns": 0.744,
+        "Incline_Dumbbell_Area": 0.818,
+        "Leg_Press_45Deg": 0.664
+      },
+      "09:00 AM": {
+        "Barbell_Bench_Press": 0.979,
+        "Olympic_Squat_Rack": 0.7,
+        "Cable_Crossover_Columns": 0.744,
+        "Incline_Dumbbell_Area": 0.818,
+        "Leg_Press_45Deg": 0.664
+      },
+      "10:00 AM": {
+        "Barbell_Bench_Press": 0.272,
+        "Olympic_Squat_Rack": 0.18,
+        "Cable_Crossover_Columns": 0.191,
+        "Incline_Dumbbell_Area": 0.201,
+        "Leg_Press_45Deg": 0.177
+      },
+      "11:00 AM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "12:00 PM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "01:00 PM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "02:00 PM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "03:00 PM": {
+        "Barbell_Bench_Press": 0.26,
+        "Olympic_Squat_Rack": 0.176,
+        "Cable_Crossover_Columns": 0.193,
+        "Incline_Dumbbell_Area": 0.218,
+        "Leg_Press_45Deg": 0.159
+      },
+      "04:00 PM": {
+        "Barbell_Bench_Press": 0.278,
+        "Olympic_Squat_Rack": 0.169,
+        "Cable_Crossover_Columns": 0.188,
+        "Incline_Dumbbell_Area": 0.2,
+        "Leg_Press_45Deg": 0.175
+      },
+      "05:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.83,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.776
+      },
+      "06:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.827,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.958,
+        "Leg_Press_45Deg": 0.779
+      },
+      "07:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.829,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.957,
+        "Leg_Press_45Deg": 0.777
+      },
+      "08:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.828,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.957,
+        "Leg_Press_45Deg": 0.778
+      },
+      "09:00 PM": {
+        "Barbell_Bench_Press": 0.371,
+        "Olympic_Squat_Rack": 0.259,
+        "Cable_Crossover_Columns": 0.263,
+        "Incline_Dumbbell_Area": 0.285,
+        "Leg_Press_45Deg": 0.24
+      },
+      "10:00 PM": {
+        "Barbell_Bench_Press": 0.364,
+        "Olympic_Squat_Rack": 0.257,
+        "Cable_Crossover_Columns": 0.269,
+        "Incline_Dumbbell_Area": 0.296,
+        "Leg_Press_45Deg": 0.238
+      }
+    },
+    "Tuesday": {
+      "06:00 AM": {
+        "Barbell_Bench_Press": 0.243,
+        "Olympic_Squat_Rack": 0.181,
+        "Cable_Crossover_Columns": 0.19,
+        "Incline_Dumbbell_Area": 0.212,
+        "Leg_Press_45Deg": 0.171
+      },
+      "07:00 AM": {
+        "Barbell_Bench_Press": 0.936,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.742,
+        "Incline_Dumbbell_Area": 0.817,
+        "Leg_Press_45Deg": 0.66
+      },
+      "08:00 AM": {
+        "Barbell_Bench_Press": 0.936,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.742,
+        "Incline_Dumbbell_Area": 0.817,
+        "Leg_Press_45Deg": 0.66
+      },
+      "09:00 AM": {
+        "Barbell_Bench_Press": 0.936,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.742,
+        "Incline_Dumbbell_Area": 0.817,
+        "Leg_Press_45Deg": 0.66
+      },
+      "10:00 AM": {
+        "Barbell_Bench_Press": 0.241,
+        "Olympic_Squat_Rack": 0.19,
+        "Cable_Crossover_Columns": 0.184,
+        "Incline_Dumbbell_Area": 0.208,
+        "Leg_Press_45Deg": 0.176
+      },
+      "11:00 AM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "12:00 PM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "01:00 PM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "02:00 PM": {
+        "Barbell_Bench_Press": 0.485,
+        "Olympic_Squat_Rack": 0.344,
+        "Cable_Crossover_Columns": 0.363,
+        "Incline_Dumbbell_Area": 0.396,
+        "Leg_Press_45Deg": 0.322
+      },
+      "03:00 PM": {
+        "Barbell_Bench_Press": 0.234,
+        "Olympic_Squat_Rack": 0.181,
+        "Cable_Crossover_Columns": 0.196,
+        "Incline_Dumbbell_Area": 0.208,
+        "Leg_Press_45Deg": 0.171
+      },
+      "04:00 PM": {
+        "Barbell_Bench_Press": 0.24,
+        "Olympic_Squat_Rack": 0.18,
+        "Cable_Crossover_Columns": 0.191,
+        "Incline_Dumbbell_Area": 0.209,
+        "Leg_Press_45Deg": 0.182
+      },
+      "05:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.84,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.958,
+        "Leg_Press_45Deg": 0.79
+      },
+      "06:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.827,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.958,
+        "Leg_Press_45Deg": 0.786
+      },
+      "07:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.825,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.781
+      },
+      "08:00 PM": {
+        "Barbell_Bench_Press": 0.98,
+        "Olympic_Squat_Rack": 0.824,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.781
+      },
+      "09:00 PM": {
+        "Barbell_Bench_Press": 0.339,
+        "Olympic_Squat_Rack": 0.248,
+        "Cable_Crossover_Columns": 0.269,
+        "Incline_Dumbbell_Area": 0.293,
+        "Leg_Press_45Deg": 0.245
+      },
+      "10:00 PM": {
+        "Barbell_Bench_Press": 0.332,
+        "Olympic_Squat_Rack": 0.246,
+        "Cable_Crossover_Columns": 0.272,
+        "Incline_Dumbbell_Area": 0.292,
+        "Leg_Press_45Deg": 0.238
+      }
+    },
+    "Wednesday": {
+      "06:00 AM": {
+        "Barbell_Bench_Press": 0.192,
+        "Olympic_Squat_Rack": 0.248,
+        "Cable_Crossover_Columns": 0.2,
+        "Incline_Dumbbell_Area": 0.207,
+        "Leg_Press_45Deg": 0.247
+      },
+      "07:00 AM": {
+        "Barbell_Bench_Press": 0.748,
+        "Olympic_Squat_Rack": 0.965,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.936
+      },
+      "08:00 AM": {
+        "Barbell_Bench_Press": 0.748,
+        "Olympic_Squat_Rack": 0.965,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.936
+      },
+      "09:00 AM": {
+        "Barbell_Bench_Press": 0.748,
+        "Olympic_Squat_Rack": 0.965,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.936
+      },
+      "10:00 AM": {
+        "Barbell_Bench_Press": 0.194,
+        "Olympic_Squat_Rack": 0.259,
+        "Cable_Crossover_Columns": 0.186,
+        "Incline_Dumbbell_Area": 0.214,
+        "Leg_Press_45Deg": 0.255
+      },
+      "11:00 AM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "12:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "01:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "02:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "03:00 PM": {
+        "Barbell_Bench_Press": 0.179,
+        "Olympic_Squat_Rack": 0.247,
+        "Cable_Crossover_Columns": 0.19,
+        "Incline_Dumbbell_Area": 0.212,
+        "Leg_Press_45Deg": 0.252
+      },
+      "04:00 PM": {
+        "Barbell_Bench_Press": 0.184,
+        "Olympic_Squat_Rack": 0.262,
+        "Cable_Crossover_Columns": 0.191,
+        "Incline_Dumbbell_Area": 0.21,
+        "Leg_Press_45Deg": 0.251
+      },
+      "05:00 PM": {
+        "Barbell_Bench_Press": 0.875,
+        "Olympic_Squat_Rack": 0.98,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.95
+      },
+      "06:00 PM": {
+        "Barbell_Bench_Press": 0.872,
+        "Olympic_Squat_Rack": 0.98,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.957,
+        "Leg_Press_45Deg": 0.95
+      },
+      "07:00 PM": {
+        "Barbell_Bench_Press": 0.875,
+        "Olympic_Squat_Rack": 0.98,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.958,
+        "Leg_Press_45Deg": 0.95
+      },
+      "08:00 PM": {
+        "Barbell_Bench_Press": 0.882,
+        "Olympic_Squat_Rack": 0.98,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.958,
+        "Leg_Press_45Deg": 0.95
+      },
+      "09:00 PM": {
+        "Barbell_Bench_Press": 0.262,
+        "Olympic_Squat_Rack": 0.369,
+        "Cable_Crossover_Columns": 0.269,
+        "Incline_Dumbbell_Area": 0.292,
+        "Leg_Press_45Deg": 0.351
+      },
+      "10:00 PM": {
+        "Barbell_Bench_Press": 0.263,
+        "Olympic_Squat_Rack": 0.36,
+        "Cable_Crossover_Columns": 0.268,
+        "Incline_Dumbbell_Area": 0.297,
+        "Leg_Press_45Deg": 0.349
+      }
+    },
+    "Thursday": {
+      "06:00 AM": {
+        "Barbell_Bench_Press": 0.189,
+        "Olympic_Squat_Rack": 0.183,
+        "Cable_Crossover_Columns": 0.193,
+        "Incline_Dumbbell_Area": 0.215,
+        "Leg_Press_45Deg": 0.167
+      },
+      "07:00 AM": {
+        "Barbell_Bench_Press": 0.74,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.67
+      },
+      "08:00 AM": {
+        "Barbell_Bench_Press": 0.74,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.67
+      },
+      "09:00 AM": {
+        "Barbell_Bench_Press": 0.74,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.67
+      },
+      "10:00 AM": {
+        "Barbell_Bench_Press": 0.18,
+        "Olympic_Squat_Rack": 0.207,
+        "Cable_Crossover_Columns": 0.187,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.187
+      },
+      "11:00 AM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "12:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "01:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "02:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "03:00 PM": {
+        "Barbell_Bench_Press": 0.192,
+        "Olympic_Squat_Rack": 0.187,
+        "Cable_Crossover_Columns": 0.189,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.172
+      },
+      "04:00 PM": {
+        "Barbell_Bench_Press": 0.193,
+        "Olympic_Squat_Rack": 0.187,
+        "Cable_Crossover_Columns": 0.189,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.172
+      },
+      "05:00 PM": {
+        "Barbell_Bench_Press": 0.871,
+        "Olympic_Squat_Rack": 0.831,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.784
+      },
+      "06:00 PM": {
+        "Barbell_Bench_Press": 0.872,
+        "Olympic_Squat_Rack": 0.83,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.784
+      },
+      "07:00 PM": {
+        "Barbell_Bench_Press": 0.87,
+        "Olympic_Squat_Rack": 0.831,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.784
+      },
+      "08:00 PM": {
+        "Barbell_Bench_Press": 0.87,
+        "Olympic_Squat_Rack": 0.83,
+        "Cable_Crossover_Columns": 0.959,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.787
+      },
+      "09:00 PM": {
+        "Barbell_Bench_Press": 0.272,
+        "Olympic_Squat_Rack": 0.253,
+        "Cable_Crossover_Columns": 0.263,
+        "Incline_Dumbbell_Area": 0.294,
+        "Leg_Press_45Deg": 0.242
+      },
+      "10:00 PM": {
+        "Barbell_Bench_Press": 0.267,
+        "Olympic_Squat_Rack": 0.253,
+        "Cable_Crossover_Columns": 0.266,
+        "Incline_Dumbbell_Area": 0.297,
+        "Leg_Press_45Deg": 0.236
+      }
+    },
+    "Friday": {
+      "06:00 AM": {
+        "Barbell_Bench_Press": 0.189,
+        "Olympic_Squat_Rack": 0.183,
+        "Cable_Crossover_Columns": 0.193,
+        "Incline_Dumbbell_Area": 0.215,
+        "Leg_Press_45Deg": 0.167
+      },
+      "07:00 AM": {
+        "Barbell_Bench_Press": 0.74,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.67
+      },
+      "08:00 AM": {
+        "Barbell_Bench_Press": 0.74,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.67
+      },
+      "09:00 AM": {
+        "Barbell_Bench_Press": 0.74,
+        "Olympic_Squat_Rack": 0.704,
+        "Cable_Crossover_Columns": 0.741,
+        "Incline_Dumbbell_Area": 0.82,
+        "Leg_Press_45Deg": 0.67
+      },
+      "10:00 AM": {
+        "Barbell_Bench_Press": 0.18,
+        "Olympic_Squat_Rack": 0.207,
+        "Cable_Crossover_Columns": 0.187,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.187
+      },
+      "11:00 AM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "12:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "01:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "02:00 PM": {
+        "Barbell_Bench_Press": 0.363,
+        "Olympic_Squat_Rack": 0.392,
+        "Cable_Crossover_Columns": 0.361,
+        "Incline_Dumbbell_Area": 0.399,
+        "Leg_Press_45Deg": 0.373
+      },
+      "03:00 PM": {
+        "Barbell_Bench_Press": 0.193,
+        "Olympic_Squat_Rack": 0.186,
+        "Cable_Crossover_Columns": 0.189,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.172
+      },
+      "04:00 PM": {
+        "Barbell_Bench_Press": 0.193,
+        "Olympic_Squat_Rack": 0.187,
+        "Cable_Crossover_Columns": 0.189,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.172
+      },
+      "05:00 PM": {
+        "Barbell_Bench_Press": 0.873,
+        "Olympic_Squat_Rack": 0.832,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.955,
+        "Leg_Press_45Deg": 0.78
+      },
+      "06:00 PM": {
+        "Barbell_Bench_Press": 0.874,
+        "Olympic_Squat_Rack": 0.831,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.78
+      },
+      "07:00 PM": {
+        "Barbell_Bench_Press": 0.872,
+        "Olympic_Squat_Rack": 0.832,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.78
+      },
+      "08:00 PM": {
+        "Barbell_Bench_Press": 0.872,
+        "Olympic_Squat_Rack": 0.831,
+        "Cable_Crossover_Columns": 0.96,
+        "Incline_Dumbbell_Area": 0.956,
+        "Leg_Press_45Deg": 0.783
+      },
+      "09:00 PM": {
+        "Barbell_Bench_Press": 0.271,
+        "Olympic_Squat_Rack": 0.258,
+        "Cable_Crossover_Columns": 0.263,
+        "Incline_Dumbbell_Area": 0.296,
+        "Leg_Press_45Deg": 0.239
+      },
+      "10:00 PM": {
+        "Barbell_Bench_Press": 0.267,
+        "Olympic_Squat_Rack": 0.258,
+        "Cable_Crossover_Columns": 0.266,
+        "Incline_Dumbbell_Area": 0.298,
+        "Leg_Press_45Deg": 0.233
+      }
+    },
+    "Saturday": {
+      "06:00 AM": {
+        "Barbell_Bench_Press": 0.158,
+        "Olympic_Squat_Rack": 0.233,
+        "Cable_Crossover_Columns": 0.195,
+        "Incline_Dumbbell_Area": 0.213,
+        "Leg_Press_45Deg": 0.21
+      },
+      "07:00 AM": {
+        "Barbell_Bench_Press": 0.317,
+        "Olympic_Squat_Rack": 0.462,
+        "Cable_Crossover_Columns": 0.388,
+        "Incline_Dumbbell_Area": 0.414,
+        "Leg_Press_45Deg": 0.492
+      },
+      "08:00 AM": {
+        "Barbell_Bench_Press": 0.314,
+        "Olympic_Squat_Rack": 0.462,
+        "Cable_Crossover_Columns": 0.386,
+        "Incline_Dumbbell_Area": 0.414,
+        "Leg_Press_45Deg": 0.495
+      },
+      "09:00 AM": {
+        "Barbell_Bench_Press": 0.319,
+        "Olympic_Squat_Rack": 0.472,
+        "Cable_Crossover_Columns": 0.374,
+        "Incline_Dumbbell_Area": 0.419,
+        "Leg_Press_45Deg": 0.504
+      },
+      "10:00 AM": {
+        "Barbell_Bench_Press": 0.18,
+        "Olympic_Squat_Rack": 0.208,
+        "Cable_Crossover_Columns": 0.187,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.189
+      },
+      "11:00 AM": {
+        "Barbell_Bench_Press": 0.434,
+        "Olympic_Squat_Rack": 0.634,
+        "Cable_Crossover_Columns": 0.523,
+        "Incline_Dumbbell_Area": 0.579,
+        "Leg_Press_45Deg": 0.685
+      },
+      "12:00 PM": {
+        "Barbell_Bench_Press": 0.434,
+        "Olympic_Squat_Rack": 0.634,
+        "Cable_Crossover_Columns": 0.523,
+        "Incline_Dumbbell_Area": 0.579,
+        "Leg_Press_45Deg": 0.685
+      },
+      "01:00 PM": {
+        "Barbell_Bench_Press": 0.434,
+        "Olympic_Squat_Rack": 0.634,
+        "Cable_Crossover_Columns": 0.523,
+        "Incline_Dumbbell_Area": 0.579,
+        "Leg_Press_45Deg": 0.685
+      },
+      "02:00 PM": {
+        "Barbell_Bench_Press": 0.434,
+        "Olympic_Squat_Rack": 0.634,
+        "Cable_Crossover_Columns": 0.523,
+        "Incline_Dumbbell_Area": 0.579,
+        "Leg_Press_45Deg": 0.685
+      },
+      "03:00 PM": {
+        "Barbell_Bench_Press": 0.158,
+        "Olympic_Squat_Rack": 0.231,
+        "Cable_Crossover_Columns": 0.186,
+        "Incline_Dumbbell_Area": 0.209,
+        "Leg_Press_45Deg": 0.211
+      },
+      "04:00 PM": {
+        "Barbell_Bench_Press": 0.158,
+        "Olympic_Squat_Rack": 0.231,
+        "Cable_Crossover_Columns": 0.186,
+        "Incline_Dumbbell_Area": 0.209,
+        "Leg_Press_45Deg": 0.211
+      },
+      "05:00 PM": {
+        "Barbell_Bench_Press": 0.386,
+        "Olympic_Squat_Rack": 0.545,
+        "Cable_Crossover_Columns": 0.522,
+        "Incline_Dumbbell_Area": 0.503,
+        "Leg_Press_45Deg": 0.603
+      },
+      "06:00 PM": {
+        "Barbell_Bench_Press": 0.382,
+        "Olympic_Squat_Rack": 0.551,
+        "Cable_Crossover_Columns": 0.53,
+        "Incline_Dumbbell_Area": 0.507,
+        "Leg_Press_45Deg": 0.611
+      },
+      "07:00 PM": {
+        "Barbell_Bench_Press": 0.375,
+        "Olympic_Squat_Rack": 0.555,
+        "Cable_Crossover_Columns": 0.525,
+        "Incline_Dumbbell_Area": 0.507,
+        "Leg_Press_45Deg": 0.607
+      },
+      "08:00 PM": {
+        "Barbell_Bench_Press": 0.385,
+        "Olympic_Squat_Rack": 0.553,
+        "Cable_Crossover_Columns": 0.526,
+        "Incline_Dumbbell_Area": 0.501,
+        "Leg_Press_45Deg": 0.607
+      },
+      "09:00 PM": {
+        "Barbell_Bench_Press": 0.226,
+        "Olympic_Squat_Rack": 0.323,
+        "Cable_Crossover_Columns": 0.263,
+        "Incline_Dumbbell_Area": 0.294,
+        "Leg_Press_45Deg": 0.349
+      },
+      "10:00 PM": {
+        "Barbell_Bench_Press": 0.226,
+        "Olympic_Squat_Rack": 0.323,
+        "Cable_Crossover_Columns": 0.263,
+        "Incline_Dumbbell_Area": 0.294,
+        "Leg_Press_45Deg": 0.349
+      }
+    },
+    "Sunday": {
+      "06:00 AM": {
+        "Barbell_Bench_Press": 0.158,
+        "Olympic_Squat_Rack": 0.233,
+        "Cable_Crossover_Columns": 0.196,
+        "Incline_Dumbbell_Area": 0.214,
+        "Leg_Press_45Deg": 0.204
+      },
+      "07:00 AM": {
+        "Barbell_Bench_Press": 0.324,
+        "Olympic_Squat_Rack": 0.453,
+        "Cable_Crossover_Columns": 0.376,
+        "Incline_Dumbbell_Area": 0.421,
+        "Leg_Press_45Deg": 0.345
+      },
+      "08:00 AM": {
+        "Barbell_Bench_Press": 0.32,
+        "Olympic_Squat_Rack": 0.455,
+        "Cable_Crossover_Columns": 0.371,
+        "Incline_Dumbbell_Area": 0.418,
+        "Leg_Press_45Deg": 0.34
+      },
+      "09:00 AM": {
+        "Barbell_Bench_Press": 0.32,
+        "Olympic_Squat_Rack": 0.455,
+        "Cable_Crossover_Columns": 0.371,
+        "Incline_Dumbbell_Area": 0.419,
+        "Leg_Press_45Deg": 0.338
+      },
+      "10:00 AM": {
+        "Barbell_Bench_Press": 0.18,
+        "Olympic_Squat_Rack": 0.208,
+        "Cable_Crossover_Columns": 0.187,
+        "Incline_Dumbbell_Area": 0.211,
+        "Leg_Press_45Deg": 0.188
+      },
+      "11:00 AM": {
+        "Barbell_Bench_Press": 0.443,
+        "Olympic_Squat_Rack": 0.631,
+        "Cable_Crossover_Columns": 0.526,
+        "Incline_Dumbbell_Area": 0.581,
+        "Leg_Press_45Deg": 0.473
+      },
+      "12:00 PM": {
+        "Barbell_Bench_Press": 0.443,
+        "Olympic_Squat_Rack": 0.631,
+        "Cable_Crossover_Columns": 0.526,
+        "Incline_Dumbbell_Area": 0.581,
+        "Leg_Press_45Deg": 0.473
+      },
+      "01:00 PM": {
+        "Barbell_Bench_Press": 0.443,
+        "Olympic_Squat_Rack": 0.631,
+        "Cable_Crossover_Columns": 0.526,
+        "Incline_Dumbbell_Area": 0.581,
+        "Leg_Press_45Deg": 0.473
+      },
+      "02:00 PM": {
+        "Barbell_Bench_Press": 0.443,
+        "Olympic_Squat_Rack": 0.631,
+        "Cable_Crossover_Columns": 0.526,
+        "Incline_Dumbbell_Area": 0.581,
+        "Leg_Press_45Deg": 0.473
+      },
+      "03:00 PM": {
+        "Barbell_Bench_Press": 0.158,
+        "Olympic_Squat_Rack": 0.232,
+        "Cable_Crossover_Columns": 0.186,
+        "Incline_Dumbbell_Area": 0.209,
+        "Leg_Press_45Deg": 0.208
+      },
+      "04:00 PM": {
+        "Barbell_Bench_Press": 0.158,
+        "Olympic_Squat_Rack": 0.232,
+        "Cable_Crossover_Columns": 0.186,
+        "Incline_Dumbbell_Area": 0.209,
+        "Leg_Press_45Deg": 0.208
+      },
+      "05:00 PM": {
+        "Barbell_Bench_Press": 0.386,
+        "Olympic_Squat_Rack": 0.556,
+        "Cable_Crossover_Columns": 0.528,
+        "Incline_Dumbbell_Area": 0.505,
+        "Leg_Press_45Deg": 0.407
+      },
+      "06:00 PM": {
+        "Barbell_Bench_Press": 0.394,
+        "Olympic_Squat_Rack": 0.558,
+        "Cable_Crossover_Columns": 0.53,
+        "Incline_Dumbbell_Area": 0.501,
+        "Leg_Press_45Deg": 0.417
+      },
+      "07:00 PM": {
+        "Barbell_Bench_Press": 0.385,
+        "Olympic_Squat_Rack": 0.558,
+        "Cable_Crossover_Columns": 0.529,
+        "Incline_Dumbbell_Area": 0.501,
+        "Leg_Press_45Deg": 0.424
+      },
+      "08:00 PM": {
+        "Barbell_Bench_Press": 0.39,
+        "Olympic_Squat_Rack": 0.558,
+        "Cable_Crossover_Columns": 0.532,
+        "Incline_Dumbbell_Area": 0.507,
+        "Leg_Press_45Deg": 0.407
+      },
+      "09:00 PM": {
+        "Barbell_Bench_Press": 0.224,
+        "Olympic_Squat_Rack": 0.324,
+        "Cable_Crossover_Columns": 0.269,
+        "Incline_Dumbbell_Area": 0.288,
+        "Leg_Press_45Deg": 0.242
+      },
+      "10:00 PM": {
+        "Barbell_Bench_Press": 0.224,
+        "Olympic_Squat_Rack": 0.324,
+        "Cable_Crossover_Columns": 0.269,
+        "Incline_Dumbbell_Area": 0.288,
+        "Leg_Press_45Deg": 0.242
+      }
+    }
+  }
+}

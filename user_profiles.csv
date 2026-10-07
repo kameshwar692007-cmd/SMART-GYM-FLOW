@@ -1,0 +1,51 @@
+user_id,goal,available_mins,target_muscle
+U_001,Weight Loss,30,Chest
+U_002,Strength,30,Back
+U_003,Hypertrophy,45,Full Body
+U_004,Hypertrophy,30,Chest
+U_005,Weight Loss,60,Legs
+U_006,Hypertrophy,60,Legs
+U_007,Strength,90,Full Body
+U_008,Strength,90,Full Body
+U_009,Weight Loss,30,Full Body
+U_010,Weight Loss,90,Back
+U_011,Weight Loss,45,Legs
+U_012,Strength,60,Legs
+U_013,Weight Loss,90,Full Body
+U_014,Weight Loss,30,Chest
+U_015,Hypertrophy,30,Full Body
+U_016,Strength,45,Full Body
+U_017,Strength,90,Legs
+U_018,Weight Loss,45,Chest
+U_019,Strength,60,Full Body
+U_020,Hypertrophy,45,Legs
+U_021,Hypertrophy,30,Legs
+U_022,Hypertrophy,45,Back
+U_023,Weight Loss,90,Legs
+U_024,Strength,90,Full Body
+U_025,Weight Loss,60,Back
+U_026,Strength,30,Legs
+U_027,Weight Loss,90,Legs
+U_028,Hypertrophy,30,Full Body
+U_029,Hypertrophy,60,Legs
+U_030,Weight Loss,90,Full Body
+U_031,Weight Loss,90,Back
+U_032,Hypertrophy,45,Chest
+U_033,Weight Loss,30,Back
+U_034,Weight Loss,60,Full Body
+U_035,Strength,45,Full Body
+U_036,Strength,60,Full Body
+U_037,Weight Loss,45,Full Body
+U_038,Weight Loss,45,Back
+U_039,Strength,90,Full Body
+U_040,Hypertrophy,60,Chest
+U_041,Hypertrophy,90,Full Body
+U_042,Hypertrophy,90,Full Body
+U_043,Weight Loss,90,Legs
+U_044,Weight Loss,90,Full Body
+U_045,Strength,45,Legs
+U_046,Strength,45,Back
+U_047,Strength,45,Chest
+U_048,Hypertrophy,30,Full Body
+U_049,Hypertrophy,90,Back
+U_050,Hypertrophy,90,Legs

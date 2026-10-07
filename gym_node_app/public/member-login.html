@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Portal - Authentication</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+        .auth-tab.active {
+            background-color: #0284c7;
+            color: #ffffff;
+            border-color: #38bdf8;
+        }
+        .auth-panel { display: none; }
+        .auth-panel.active { display: block; }
+
+        .demo-chip {
+            display: inline-block;
+            background: #0f172a;
+            border: 1px solid #334155;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            color: #94a3b8;
+            transition: all 0.2s ease;
+        }
+        .demo-chip:hover {
+            border-color: #38bdf8;
+            color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 500px; margin-top: 50px; margin-bottom: 50px;">
+        <a href="/" style="color: var(--text-secondary); text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 20px;">&larr; Back to Portal Selection</a>
+
+        <div class="card" style="border: 1px solid #0284c7; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="font-size: 38px; margin-bottom: 8px;">👤</div>
+                <h1 style="font-size: 24px; font-weight: 800;">Member Access Portal</h1>
+                <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">
+                    Persistent SQLite Database Authentication & Profile Storage
+                </p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">🔑 Member Login</div>
+                <div class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">✨ New Registration</div>
+            </div>
+
+            <div id="authAlert" style="display: none; padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 16px;"></div>
+
+            <!-- PANEL 1: LOGIN -->
+            <div id="loginPanel" class="auth-panel active">
+                <form id="memberLoginForm">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="loginUsername" placeholder="e.g. alex" required value="alex">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter password" required value="123">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 12px; background: linear-gradient(135deg, #0284c7, #2563eb);">
+                        Sign In & Access Workout
+                    </button>
+                </form>
+
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-color);">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; font-weight: 600;">
+                        💡 Quick Demo Logins (Click to autofill from SQLite Database):
+                    </div>
+                    <div>
+                        <span class="demo-chip" onclick="fillLogin('alex', '123')">Alex (Hypertrophy / Chest)</span>
+                        <span class="demo-chip" onclick="fillLogin('marcus', '123')">Marcus (Powerlifter / Chest)</span>
+                        <span class="demo-chip" onclick="fillLogin('sarah', '123')">Sarah (Fat Loss / Legs)</span>
+                        <span class="demo-chip" onclick="fillLogin('elena', '123')">Elena (Fresher / Legs)</span>
+                        <span class="demo-chip" onclick="fillLogin('kevin_lee', 'secretpassword')">Kevin Lee (Strength)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 2: REGISTRATION -->
+            <div id="registerPanel" class="auth-panel">
+                <form id="memberRegisterForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regFullName" placeholder="e.g. Jordan Reed" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Choose Username</label>
+                        <input type="text" id="regUsername" placeholder="e.g. jordan_reed" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Create Password</label>
+                        <input type="password" id="regPassword" placeholder="Choose a secure password" required>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="regGender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="regAge" value="25" min="14" max="80" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Primary Fitness Goal</label>
+                        <select id="regGoal">
+                            <option value="Bodybuilding (Muscle Mass)">Bodybuilding (Hypertrophy / Mass)</option>
+                            <option value="Fat Loss & Lean Definition">Fat Loss & Calorie Burn</option>
+                            <option value="Strength & Power (Powerlifting)">Strength & Heavy Compound Power</option>
+                            <option value="General Fitness & Toning">General Fitness & Posture</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px; background: linear-gradient(135deg, #10b981, #059669);">
+                        ✨ Create Account & Proceed to Biometrics
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAlert(msg, isError = false) {
+            const el = document.getElementById('authAlert');
+            el.style.display = 'block';
+            el.style.backgroundColor = isError ? '#450a0a' : '#064e3b';
+            el.style.color = isError ? '#fca5a5' : '#6ee7b7';
+            el.style.border = isError ? '1px solid #ef4444' : '1px solid #10b981';
+            el.innerText = msg;
+        }
+
+        function switchAuthTab(mode) {
+            document.getElementById('authAlert').style.display = 'none';
+            if (mode === 'login') {
+                document.getElementById('tabLogin').classList.add('active');
+                document.getElementById('tabRegister').classList.remove('active');
+                document.getElementById('loginPanel').classList.add('active');
+                document.getElementById('registerPanel').classList.remove('active');
+            } else {
+                document.getElementById('tabRegister').classList.add('active');
+                document.getElementById('tabLogin').classList.remove('active');
+                document.getElementById('registerPanel').classList.add('active');
+                document.getElementById('loginPanel').classList.remove('active');
+            }
+        }
+
+        function fillLogin(user, pass) {
+            document.getElementById('loginUsername').value = user;
+            document.getElementById('loginPassword').value = pass;
+            showAlert(`Loaded credentials for ${user} (password: ${pass})`);
+        }
+
+        // Handle Member Login
+        document.getElementById('memberLoginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const res = await fetch('/api/member/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+                if (data.success && data.member) {
+                    // Store active user in localStorage
+                    localStorage.setItem('activeMemberName', data.member.name);
+                    localStorage.setItem('activeUsername', data.member.username);
+                    showAlert("Authentication successful! Loading your workout schedule...", false);
+                    setTimeout(() => {
+                        window.location.href = '/member/workout';
+                    }, 500);
+                } else {
+                    showAlert(data.message || "Invalid credentials", true);
+                }
+            } catch (err) {
+                showAlert("Server connection failed. Is the backend running?", true);
+            }
+        });
+
+        // Handle Member Registration
+        document.getElementById('memberRegisterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('regFullName').value.trim();
+            const username = document.getElementById('regUsername').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const gender = document.getElementById('regGender').value;
+            const age = document.getElementById('regAge').value;
+            const goal = document.getElementById('regGoal').value;
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        fullName,
+                        username,
+                        password,
+                        gender,
+                        age,
+                        goal,
+                        heightCm: 175,
+                        weightKg: 70,
+                        experience: 'Beginner (Fresher)',
+                        arrivalTime: '08:00 AM',
+                        focusMuscle: 'Chest',
+                        durationMins: 45
+                    })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    localStorage.setItem('activeMemberName', fullName);
+                    localStorage.setItem('activeUsername', username);
+                    showAlert(`Account for ${username} created in SQLite database! Forwarding to Biometrics Assessment...`, false);
+                    setTimeout(() => {
+                        window.location.href = '/member/assessment';
+                    }, 900);
+                } else {
+                    showAlert(data.message || "Registration failed", true);
+                }
+            } catch (err) {
+                showAlert("Server error during registration.", true);
+            }
+        });
+    </script>
+</body>
+</html>
